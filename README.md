@@ -1,18 +1,20 @@
-# Nome do projeto
+# EVENTIFY
 
-Escreva um ou dois parágrafo resumindo o objetivo do seu projeto.
+O objetivo geral deste projeto é criar de um portal que apresente ferramentas que permitam, de forma fácil e centralizada, o cadastro e o acesso dos mais variados eventos culturais das cidades do Brasil.
 
 ## Alunos integrantes da equipe
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Ardson Hugo de Oliveira Aguilar
+* Felipe Rodrigues Roque
+* Gabriel Alves Reis
+* Gustavo Coelho de Mendonça
+* Tiago dos Reis Gomes
+* Wagner Alexsander de Carvalho Viana
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
+* Pedro Felipe Alves de Oliveira
+* Katia Adriana Alves Leite de Barros
 
 ## Instruções de utilização
 
