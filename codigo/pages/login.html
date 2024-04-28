@@ -3,12 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Eventify - login</title>
 </head>
 <body>
-    
+    <main class="login-main">
+        <div class="login-logo">
+            <img src="../assets/images/logo (1).png" alt="Eventify Logo">
+        </div>
+        <div class="form-container">
+            <form id="sign-in-form" class="sign-in-form login-form" onsubmit="return false;">
+                <label for="Login">Login</label>
+                <input class="text-form-button" name="Login" type="text">
+                <label for="Senha">Senha</label>
+                <input class="text-form-button" name="Senha" type="text">
+
+                <button class="primary-button" onclick="signIn()">Entrar</button>
+                <button class="secondary-button" onclick="showSignUpForm()">Cadastrar</button>
+            </form>
+
+            <form id="sign-up-form" class="sign-up-form login-form" style="display: none;" onsubmit="return false;">
+                <i class="fa fa-arrow-left fa-2x" onclick="showSignInForm()"></i>
+                <h1>Cadastro</h1>
+
+                <label>Nome *</label>
+                <input class="text-form-button" name="Nome" type="text">
+
+                <label>Cidade *</label>
+                <input class="text-form-button" name="Cidade" type="text">
+
+                <label>E-mail *</label>
+                <input class="text-form-button" name="E-mail" type="text">
+
+                <label>Interesses *</label>
+                <div class="check-form-button">
+                    <input type="checkbox" id="show" value="show" name="Interesses"/>
+                    <label for="show">Show ao vivo</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="festival" value="festival" name="Interesses"/>
+                    <label for="festival">Festival</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="theater" value="theater" name="Interesses"/>
+                    <label for="theater">Teatro</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="museum" value="museum" name="Interesses"/>
+                    <label for="museum">Museu</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="party" value="party" name="Interesses"/>
+                    <label for="party">Festa</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="bar" value="bar" name="Interesses"/>
+                    <label for="bar">Bar & Cultura</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="coffe" value="coffe" name="Interesses"/>
+                    <label for="coffe">Café</label>
+                </div>
+
+                <label>Login *</label>
+                <input class="text-form-button" name="Login" type="text">
+
+                <label>Senha *</label>
+                <input class="text-form-button" type="password" name="Senha" type="text">
+
+                <label>Repetir senha *</label>
+                <input class="text-form-button" type="password" name="Repetir senha" type="text">
+
+                <label>Eu sou *</label>
+                <div class="check-form-button">
+                    <input type="radio" id="user" value="user" name="Eu sou"/>
+                    <label for="user">Usuário</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="radio" id="promoter" value="promoter" name="Eu sou"/>
+                    <label for="promoter">Promotor</label>
+                </div>
+
+                <button class="primary-button" onclick="signUp()">Cadastrar</button>
+            </form>
+        </div>
+    </main>
     <script src="../assets/js/login.js"></script>
 </body>
 </html>
