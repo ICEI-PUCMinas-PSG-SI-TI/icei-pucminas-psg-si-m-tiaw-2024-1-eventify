@@ -1,14 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/common.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <title>EVENTIFY</title>
 </head>
+
 <body>
-    
+    <header>
+        <div class="header-separeted-content">
+            <i class="fa fa-align-justify fa-2x menu-icon" style="color: #192D37;" onclick="toggleAside()"></i>
+            <a href="/" class="header-logo"><img src="assets/images/logo (2).png" alt="EVENTIFY logo"></a>
+        </div>
+        <div class="header-separeted-content">
+            <a href="/criar-evento">
+                <h1 class="create-event-title">Criar um evento</h1>
+            </a>
+            <a href="/login"><button class="sign-in-button">Entrar / Cadastrar</button></a>
+            <a href="/perfil" class="user-photo" style="display: none;"><img src="assets/images/perfil.jpg"
+                    alt="Foto do usuário"></a>
+        </div>
+    </header>
+
+    <div class="home-container">
+        <aside id="aside-filter">
+            <div class="aside-header">
+                <h1>Encontrar evento:</h1>
+                <i class="fa fal fa-times fa-1x close-aside" onclick="toggleAside()"></i>
+            </div>
+
+            <label>Nome</label>
+            <input class="text-form-button" name="Nome" type="text">
+
+            <label>Cidade</label>
+            <input class="text-form-button" name="Cidade" type="text">
+
+            <label>Data</label>
+            <input class="text-form-button" name="Data" type="text">
+
+            <label>Lugar</label>
+            <input class="text-form-button" name="Lugar" type="text">
+
+            <button onclick="filter()">Buscar</button>
+        </aside>
+
+        <main id="main-container">
+            <a href="/criar-evento">
+                <h1 class="create-event-main-title">Criar um evento</h1>
+            </a>
+
+            <div class="events-list">
+                <div class="event-card">
+                    <img src="assets/images/evento1.png" alt="Imagem do evento">
+                    <div class="event-description">
+                        <h1>Peça Nova</h1>
+                        <h2>12/05/2024 - 20:00</h2>
+                        <p>Sesc Plladium - Belo Horizonte</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="assets/images/evento1.png" alt="Imagem do evento">
+                    <div class="event-description">
+                        <h1>Peça Nova</h1>
+                        <h2>12/05/2024 - 20:00</h2>
+                        <p>Sesc Plladium - Belo Horizonte</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="assets/images/evento1.png" alt="Imagem do evento">
+                    <div class="event-description">
+                        <h1>Peça Nova</h1>
+                        <h2>12/05/2024 - 20:00</h2>
+                        <p>Sesc Plladium - Belo Horizonte</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="assets/images/evento1.png" alt="Imagem do evento">
+                    <div class="event-description">
+                        <h1>Peça Nova</h1>
+                        <h2>12/05/2024 - 20:00</h2>
+                        <p>Sesc Plladium - Belo Horizonte</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div>
+            <h1>Desenvolvido por:</h1>
+            <p>Ardson Hugo de Oliveira Aguilar / Felipe Rodrigues Roque / Gabriel Alves Reis / Gustavo Coelho de
+                Mendonça / Rogério Dias / Tiago dos Reis Gomes / Wagner Alexsander de Carvalho Viana</p>
+        </div>
+    </footer>
+    <script src="assets/js/common.js"></script>
     <script src="assets/js/index.js"></script>
 </body>
+
 </html>
