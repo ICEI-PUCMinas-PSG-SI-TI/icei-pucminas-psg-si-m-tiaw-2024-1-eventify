@@ -7,8 +7,8 @@ body {
 }
 
 header {
-    max-height: 10%;
-    padding: 16px;
+    height: 10%;
+    padding: 0 16px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -19,12 +19,16 @@ header {
     .header-logo {
         height: 36px;
 
+        @media (max-width: 480px) {
+            height: 24px;
+        }
+
         img {
             cursor: pointer;
             height: 36px;
             border-radius: 12px;
-    
-            @media (max-width: 320px) {
+
+            @media (max-width: 480px) {
                 height: 24px;
                 border-radius: 8px;
             }
@@ -55,7 +59,7 @@ header {
         font-weight: 300;
         text-decoration: underline;
 
-        @media (max-width: 556px) {
+        @media (max-width: 700px) {
             display: none;
         }
     }
@@ -69,31 +73,24 @@ header {
         height: 36px;
         padding: 0 12px;
         cursor: pointer;
+
+        @media (max-width: 480px) {
+            font-size: 14px;
+        }
+
+        @media (max-width: 360px) {
+            height: 40px;
+            border: none;
+            padding: 0 4px;
+        }
     }
 
     .user-photo {
+        cursor: pointer;
+        border: 1px solid white;
+        box-shadow: 0px 1px 2px #D9D9D9;
+        border-radius: 50%;
         width: 36px;
         height: 36px;
-
-        img {
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-        }
-    }
-}
-
-footer {
-    color: white;
-    background-color: black;
-    text-align: center;
-    padding: 4px 8px;
-    height: 10%;
-
-    h1 {
-        font-size: 16px;
-    }
-    p {
-        font-size: 12px;
     }
 }
