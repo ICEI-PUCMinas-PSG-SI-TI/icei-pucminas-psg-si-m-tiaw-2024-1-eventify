@@ -86,9 +86,13 @@ header {
     }
 
     .user-photo {
+        text-align: center;
+        font-weight: 700;
+        font-size: 24px;
         cursor: pointer;
+        background-color: white;
         border: 1px solid white;
-        box-shadow: 0px 1px 2px #D9D9D9;
+        box-shadow: 0px 1px 2px black;
         border-radius: 50%;
         width: 36px;
         height: 36px;

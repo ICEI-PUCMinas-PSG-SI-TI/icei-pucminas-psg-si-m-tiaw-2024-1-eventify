@@ -123,6 +123,17 @@ main {
     }
 }
 
+.favorite-star {
+    width: 28px;
+    height: 28px;
+    z-index: 2;
+}
+
+.favorite-star:hover {  
+    width: 32px;
+    height: 32px;
+}
+
 .event-description {
     padding: 16px;
     width: 70%;
@@ -151,6 +162,6 @@ main {
     }
 
     @media (max-width: 1200px) {
-        width: 80%;
+        width: 100%;
     }
 }

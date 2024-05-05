@@ -18,20 +18,7 @@
             <i class="fa fa-align-justify fa-2x menu-icon" style="color: #192D37;" onclick="toggleAside()"></i>
             <a href="/" class="header-logo"><img src="assets/images/logo (2).png" alt="EVENTIFY logo"></a>
         </div>
-        <div class="header-separeted-content">
-            <a href="/criar-evento">
-                <h1 class="create-event-title">Criar um evento</h1>
-            </a>
-            <a href="/login" style="display: none;"><button class="sign-in-button">Entrar / Cadastrar</button></a>
-
-            <div class="dropdown">
-                <img data-bs-toggle="dropdown" src="assets/images/perfil.jpg" alt="Foto do usuário" class="user-photo">
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-                    <li><a class="dropdown-item" href="/criar-evento">Criar evento</a></li>
-                </ul>
-            </div>
-        </div>
+        <div id="logged-content" class="header-separeted-content"></div>
     </header>
 
     <div class="home-container">
@@ -42,16 +29,16 @@
             </div>
 
             <label>Nome</label>
-            <input class="text-form-button" name="Nome" type="text">
+            <input id="nameFilter" class="text-form-button" name="Nome" type="text">
 
             <label>Cidade</label>
-            <input class="text-form-button" name="Cidade" type="text">
+            <input id="cityFilter" class="text-form-button" name="Cidade" type="text">
 
             <label>Data</label>
-            <input class="text-form-button" name="Data" type="text">
+            <input id="dateFilter" class="text-form-button" name="Data" type="text">
 
             <label>Lugar</label>
-            <input class="text-form-button" name="Lugar" type="text">
+            <input id="placeFilter" class="text-form-button" name="Lugar" type="text">
 
             <button onclick="filter()">Buscar</button>
         </aside>
@@ -59,46 +46,10 @@
         <main id="main-container">
             <h1 class="create-event-main-title">Eventos: </h1>
 
-            <div class="events-list">
-                <div class="event-card">
-                    <img src="assets/images/evento1.png" alt="Imagem do evento">
-                    <div class="event-description">
-                        <h1>Peça Nova</h1>
-                        <h2>12/05/2024 - 20:00</h2>
-                        <p>Sesc Plladium - Belo Horizonte</p>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <img src="assets/images/evento1.png" alt="Imagem do evento">
-                    <div class="event-description">
-                        <h1>Peça Nova</h1>
-                        <h2>12/05/2024 - 20:00</h2>
-                        <p>Sesc Plladium - Belo Horizonte</p>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <img src="assets/images/evento1.png" alt="Imagem do evento">
-                    <div class="event-description">
-                        <h1>Peça Nova</h1>
-                        <h2>12/05/2024 - 20:00</h2>
-                        <p>Sesc Plladium - Belo Horizonte</p>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <img src="assets/images/evento1.png" alt="Imagem do evento">
-                    <div class="event-description">
-                        <h1>Peça Nova</h1>
-                        <h2>12/05/2024 - 20:00</h2>
-                        <p>Sesc Plladium - Belo Horizonte</p>
-                    </div>
-                </div>
-            </div>
+            <div id="events-list" class="events-list"></div>
         </main>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
