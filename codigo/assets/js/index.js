@@ -163,7 +163,7 @@ function getFavEventIcon(id) {
 }
 
 function eventClick(id) {
-    window.location.pathname += "/evento?ev=" + id;
+    window.location = window.location.href.replace("index.html","") + "pages/event.html?ev=" + id;
 }
 
 function favoriteEvent(event, id) {
