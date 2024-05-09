@@ -24,79 +24,74 @@ var responseJSON = {
     },
     eventos: [
         {
-            "evento": {
-                "id": "1",
-                "nome": "Peça nova",
-                "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-                "data": "12/05/2024",
-                "horario": "21:00 às 23:00",
-                "local": "Sesc Palladium - R. Rio de Janeiro, 1046 - Centro, Belo Horizonte - MG, 30160-041",
-                "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
-                "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
-                "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
-                "comentários": [
-                    {
-                        "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                        "nome": "Isadora Silva",
-                        "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
-                    },
-                    {
-                        "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                        "nome": "Bárbara Guedes",
-                        "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
-                    }
-                ]
-            }
+            "id": "1",
+            "nome": "Peça nova",
+            "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
+            "data": "12/05/2024",
+            "horario": "21:00 às 23:00",
+            "local": "Sesc Palladium - R. Rio de Janeiro, 1046 - Centro, Belo Horizonte - MG, 30160-041",
+            "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
+            "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
+            "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
+            "comentários": [
+                {
+                    "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
+                    "nome": "Isadora Silva",
+                    "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
+                },
+                {
+                    "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                    "nome": "Bárbara Guedes",
+                    "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
+                }
+            ]
+
         },
         {
-            "evento": {
-                "id": "2",
-                "nome": "wagner",
-                "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-                "data": "12/05/2024",
-                "horario": "21:00 às 23:00",
-                "local": "Viaduto - Centro, Belo Horizonte - MG, 30160-041",
-                "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
-                "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
-                "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
-                "comentários": [
-                    {
-                        "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                        "nome": "Isadora Silva",
-                        "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
-                    },
-                    {
-                        "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                        "nome": "Bárbara Guedes",
-                        "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
-                    }
-                ]
-            }
+            "id": "2",
+            "nome": "wagner",
+            "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
+            "data": "12/05/2024",
+            "horario": "21:00 às 23:00",
+            "local": "Viaduto - Centro, Belo Horizonte - MG, 30160-041",
+            "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
+            "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
+            "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
+            "comentários": [
+                {
+                    "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
+                    "nome": "Isadora Silva",
+                    "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
+                },
+                {
+                    "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                    "nome": "Bárbara Guedes",
+                    "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
+                }
+            ]
         },
         {
-            "evento": {
-                "id": "3",
-                "nome": "laura",
-                "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-                "data": "12/05/2024",
-                "horario": "21:00 às 23:00",
-                "local": "Sesc Palladium - R. Rio de Janeiro, 1046 - Centro, Belo Horizonte - MG, 30160-041",
-                "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
-                "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
-                "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
-                "comentários": [
-                    {
-                        "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                        "nome": "Isadora Silva",
-                        "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
-                    },
-                    {
-                        "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                        "nome": "Bárbara Guedes",
-                        "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
-                    }
-                ]
-            }
+            "id": "3",
+            "nome": "laura",
+            "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
+            "data": "12/05/2024",
+            "horario": "21:00 às 23:00",
+            "local": "Sesc Palladium - R. Rio de Janeiro, 1046 - Centro, Belo Horizonte - MG, 30160-041",
+            "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
+            "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
+            "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
+            "comentários": [
+                {
+                    "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
+                    "nome": "Isadora Silva",
+                    "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
+                },
+                {
+                    "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                    "nome": "Bárbara Guedes",
+                    "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
+                }
+            ]
         }
     ]
 };
@@ -118,7 +113,7 @@ if (personData && personData.id) {
         <div class="dropdown">
             ${userPhoto}
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/pages/perfil">Perfil</a></li>
+                <li><a class="dropdown-item" href="/codigo/pages/profile.html">Perfil</a></li>
                 ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/criar-evento">Criar evento</a></li>' : ''}
             </ul>
         </div>`;
@@ -134,15 +129,15 @@ function fillEvents(list) {
     if (list && list.length) {
         list.forEach(eventData => {
             eventListElement.innerHTML += `
-                <div style="z-index:1;" class="event-card" onclick="eventClick(${eventData.evento.id})">
-                    <img src="${eventData.evento.imagem}" alt="Imagem do evento">
+                <div style="z-index:1;" class="event-card" onclick="eventClick(${eventData.id})">
+                    <img src="${eventData.imagem}" alt="Imagem do evento">
                     <div class="event-description">
                         <div style="display: flex;align-items: flex-start;justify-content: space-between;">
-                            <h1>${eventData.evento.nome}</h1>
-                            ${getFavEventIcon(eventData.evento.id)}
+                            <h1>${eventData.nome}</h1>
+                            ${getFavEventIcon(eventData.id)}
                         </div>
-                        <h2>${eventData.evento.data} - ${eventData.evento.horario}</h2>
-                        <p>${eventData.evento.local}</p>
+                        <h2>${eventData.data} - ${eventData.horario}</h2>
+                        <p>${eventData.local}</p>
                     </div>
                 </div>
             `;
@@ -163,7 +158,7 @@ function getFavEventIcon(id) {
 }
 
 function eventClick(id) {
-    window.location = window.location.href.replace("index.html","") + "pages/event.html?ev=" + id;
+    window.location.href = window.location.origin + "/codigo/pages/event.html?ev=" + id;
 }
 
 function favoriteEvent(event, id) {
@@ -236,19 +231,19 @@ function filter() {
         }
 
         if (nameEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.evento && eventData.evento.nome.toLowerCase().includes(nameEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.nome && eventData.nome.toLowerCase().includes(nameEl.value));
         }
 
         if (cityEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.evento && eventData.evento.local.toLowerCase().includes(cityEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.toLowerCase().includes(cityEl.value));
         }
 
         if (dateEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.evento && eventData.evento.data.toLowerCase().includes(dateEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.data && eventData.data.toLowerCase().includes(dateEl.value));
         }
 
         if (placeEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.evento && eventData.evento.local.toLowerCase().includes(placeEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.toLowerCase().includes(placeEl.value));
         }
 
         fillEvents(filteredEvents);
