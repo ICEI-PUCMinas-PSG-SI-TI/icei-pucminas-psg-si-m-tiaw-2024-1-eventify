@@ -16,7 +16,8 @@
     <header>
         <div class="header-separeted-content">
             <i class="fa fa-align-justify fa-2x menu-icon" style="color: #192D37;" onclick="toggleAside()"></i>
-            <a href="/codigo/index.html" class="header-logo"><img src="assets/images/logo (2).png" alt="EVENTIFY logo"></a>
+            <a href="/codigo/index.html" class="header-logo"><img src="assets/images/logo (2).png"
+                    alt="EVENTIFY logo"></a>
         </div>
         <div id="logged-content" class="header-separeted-content"></div>
     </header>
@@ -48,6 +49,13 @@
 
             <div id="events-list" class="events-list"></div>
         </main>
+    </div>
+
+    <div id="eventToast" class="toast" autohide="true" delay="10000">
+        <div class="toast-body" style="display: flex; gap: 12px;">
+            <strong id="toast-text" class="me-auto"></strong>
+            <button id="toastCloseBtn" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

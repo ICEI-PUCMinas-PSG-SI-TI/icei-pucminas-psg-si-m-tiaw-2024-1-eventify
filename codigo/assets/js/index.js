@@ -1,6 +1,6 @@
 var responseJSON = {
     "pessoa": {
-        "id": 1,
+        "id": "1",
         "nome": "Júlia Marques",
         "foto": "https://lh3.googleusercontent.com/a/ACg8ocKZ5h6Ae_eRddMV-pNNnJMsZeonV1elhx1mXVmo8yn9jlNTYh9vUA=s288-c-no",
         "cidade": "Belo Horizonte",
@@ -51,7 +51,7 @@ var responseJSON = {
             "id": "2",
             "nome": "wagner",
             "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-            "data": "12/05/2024",
+            "data": "10/05/2024",
             "horario": "21:00 às 23:00",
             "local": "Viaduto - Centro, Belo Horizonte - MG, 30160-041",
             "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
@@ -98,6 +98,48 @@ var responseJSON = {
 
 var personData = responseJSON.pessoa;
 var eventsList = responseJSON.eventos;
+
+// toast
+if (personData && personData.eventosFavoritos && personData.eventosFavoritos.length) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
+    const favoriteEvents = eventsList.filter(eventData =>
+        personData.eventosFavoritos.some(favEvents => favEvents.id === eventData.id.toString()))
+
+    if (favoriteEvents && favoriteEvents.length) {
+        let count = 0;
+        
+        favoriteEvents.forEach(fav => {
+            if (fav && fav.data && fav.data.length === 10) {
+                let date = new Date(fav.data.slice(3, 5) + "/" + fav.data.slice(0, 2) + "/" + fav.data.slice(-4));
+                date.setHours(0, 0, 0, 0);
+                console.log(date.toISOString())
+                console.log(tomorrow.toISOString())
+                if(date.toISOString() == tomorrow.toISOString()) {
+                    count++;
+                }
+            }
+        });
+        console.log(count)
+        if (count > 0) {
+            let text = count === 1
+                ? count + " evento que você curtiu está marcado para amanhã. Confira seu perfil e saiba mais."
+                : count + " eventos que você curtiu estão marcados para amanhã. Confira seu perfil e saiba mais.";
+
+            document.getElementById("toast-text").innerHTML = text;
+            const eventToast = document.getElementById('eventToast');
+            const toastCloseBtn = document.getElementById('toastCloseBtn');
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(eventToast);
+            toastBootstrap.show();
+
+            if (toastCloseBtn && toastBootstrap && eventToast) {
+                toastCloseBtn.addEventListener('click', () => { toastBootstrap.hide() });
+            }
+        }
+    }
+}
 
 const loggedContent = document.getElementById('logged-content');
 if (personData && personData.id) {

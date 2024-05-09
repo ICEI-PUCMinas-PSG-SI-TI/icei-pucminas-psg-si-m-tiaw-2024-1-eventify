@@ -71,3 +71,25 @@ main {
     padding: 16px 16px 0;
     overflow-y: auto;
 }
+
+#eventToast {
+    background-color: #192D37; 
+    color: white; 
+    position: absolute; 
+    top: 80px; 
+    right: 20px; 
+    z-index: 3;
+    max-width: 80%;
+}
+
+#toastCloseBtn {
+    text-align: center; 
+    background-color: white; 
+    width: 32px; 
+    height:16px; 
+    border-radius: 50%;
+
+    @media (max-width: 400px) {
+        width: 44px;
+    }
+}
