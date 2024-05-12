@@ -1,136 +1,48 @@
-var responseJSON = {
-    "pessoa": {
-        "id": "1",
-        "nome": "Júlia Marques",
-        "foto": "https://lh3.googleusercontent.com/a/ACg8ocKZ5h6Ae_eRddMV-pNNnJMsZeonV1elhx1mXVmo8yn9jlNTYh9vUA=s288-c-no",
-        "cidade": "Belo Horizonte",
-        "email": "julia.marques@gmail.com",
-        "interesses": [
-            "show",
-            "teatro",
-            "bar & cultura"
-        ],
-        "login": "julia.marques",
-        "senha": "julia123",
-        "tipoUsuario": "promotor",
-        "eventosCriados": [
-            {
-                "id": "1"
-            }
-        ],
-        "eventosFavoritos": [
-            {
-                "id": "2"
-            },
-            {
-                "id": "3"
-            }
-        ]
-    },
-    eventos: [
-        {
-            "id": "1",
-            "nome": "Peça nova",
-            "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-            "data": "12/05/2024",
-            "horario": "21:00 às 23:00",
-            "local": "Sesc Palladium - R. Rio de Janeiro, 1046 - Centro, Belo Horizonte - MG, 30160-041",
-            "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
-            "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
-            "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
-            "comentários": [
-                {
-                    "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                    "nome": "Isadora Silva",
-                    "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
-                },
-                {
-                    "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                    "nome": "Bárbara Guedes",
-                    "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
-                }
-            ]
+const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
 
-        },
-        {
-            "id": "2",
-            "nome": "wagner",
-            "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-            "data": "12/05/2024",
-            "horario": "21:00 às 23:00",
-            "local": "Viaduto - Centro, Belo Horizonte - MG, 30160-041",
-            "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
-            "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
-            "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
-            "comentários": [
-                {
-                    "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                    "nome": "Isadora Silva",
-                    "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
-                },
-                {
-                    "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                    "nome": "Bárbara Guedes",
-                    "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
-                }
-            ]
-        },
-        {
-            "id": "3",
-            "nome": "laura",
-            "imagem": "https://lets.events/blog/wp-content/uploads/2023/06/Imersao-Cultural.jpg",
-            "data": "12/05/2024",
-            "horario": "21:00 às 23:00",
-            "local": "Sesc Palladium - R. Rio de Janeiro, 1046 - Centro, Belo Horizonte - MG, 30160-041",
-            "descrição": "O grupo “Peça nova” irá fazer mais uma de suas fantásticas apresentações de dança rítmica em BH, sua cidade natal, e você não pode ficar de fora dessa! Garanta já seu ingresso no link abaixo.",
-            "venda de ingressos": "https://bileto.sympla.com.br/event/92924/d/250557",
-            "saibaMais": "https://sescmg.com.br/unidade/sesc-palladium/",
-            "comentários": [
-                {
-                    "imagem": "https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                    "nome": "Isadora Silva",
-                    "texto": "Já fui em edições anteriores e gostei muito. Super recomendo!"
-                },
-                {
-                    "imagem": "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                    "nome": "Bárbara Guedes",
-                    "texto": "Estou muito animada para ir, às críticas sobre esse grupo são sempre muito positivas."
-                }
-            ]
-        }
-    ]
-};
+var personData = localStorage.getItem("userData");
+var eventsList;
 
-// Não é promotor ou não está logado
-if (!responseJSON || !responseJSON.pessoa || responseJSON.pessoa.tipoUsuario === "usuário") {
-    window.location.href = window.location.origin + "/codigo/index.html";
+if(personData && JSON.parse(personData).tipoUsuario === "promotor") {
+    personData = JSON.parse(personData);
+    loadUserInfo();
+    getEvents();
+} else {
+  window.location = "/codigo/index.html";
 }
 
-var personData = responseJSON.pessoa;
-var eventsList = responseJSON.eventos.filter(eventData =>
-    responseJSON.pessoa.eventosCriados.some(createdEvent => createdEvent.id === eventData.id));
+function loadUserInfo() {
+    const loggedContent = document.getElementById('logged-content');
+    if (personData && personData.id) {
+        const userPhoto = personData.foto
+            ? `<img data-bs-toggle="dropdown" src=${personData.foto} alt="Foto do usuário" class="user-photo"></img>`
+            : `<div data-bs-toggle="dropdown" class="user-photo">${personData.nome.slice(0, 1)}</div>`;
 
-const loggedContent = document.getElementById('logged-content');
-if (personData && personData.id) {
-    if (personData.tipoUsuario === "promotor") {
-        loggedContent.innerHTML = `<a href="/criar-evento"> <h1 class="create-event-title">Criar um evento</h1> </a>`;
-    }
-
-    const userPhoto = personData.foto
-        ? `<img data-bs-toggle="dropdown" src=${personData.foto} alt="Foto do usuário" class="user-photo"></img>`
-        : `<div data-bs-toggle="dropdown" class="user-photo">${personData.nome.slice(0, 1)}</div>`;
-
-    loggedContent.innerHTML += `
+        loggedContent.innerHTML = `
+        <a href="/codigo/pages/create-event.html"> <h1 class="create-event-title">Criar um evento</h1> </a>
         <div class="dropdown">
             ${userPhoto}
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/codigo/pages/profile.html">Perfil</a></li>
-                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/criar-evento">Criar evento</a></li>' : ''}
+                <li><a class="dropdown-item" href="/codigo/pages/create-event.html">Criar evento</a></li>
+                <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>
         </div>`;
+    }
 }
 
-fillEvents(eventsList);
+function getEvents() {
+    fetch(baseApiUrl + "eventos")
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+            eventsList = data.filter(eventData =>
+                personData.eventosCriados.some(favoriteEvent => favoriteEvent.id === eventData.id));
+            fillEvents(eventsList);
+        })
+        .catch(error => {
+            alert('Erro ao ler eventos via API JSONServer');
+        });
+}
 
 function fillEvents(list) {
     const eventListElement = document.getElementById('events-list');
@@ -159,7 +71,7 @@ function fillEvents(list) {
 }
 
 function eventClick(id) {
-    window.location.href = window.location.origin + "/codigo/pages/event.html?ev=" + id;
+    window.location = "/codigo/pages/event.html?ev=" + id;
 }
 
 function getFavEventIcon(id) {
@@ -187,12 +99,22 @@ function favoriteEvent(event, id) {
         personData.eventosFavoritos.push({ id: id.toString() });
     }
 
-    responseJSON = {
-        pessoa: personData,
-        eventos: eventsList
-    };
+    // Atualiza db
+    fetch(baseApiUrl + "pessoas/" + personData.id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "eventosFavoritos": personData.eventosFavoritos
+        }),
+    })
+        .catch(error => {
+            alert('Erro ao favoritar evento via API JSONServer.');
+        });
+}
 
-    personData = responseJSON.pessoa;
-
-    // TO DO: Salvar no JSON os dados da pessoa
+function logout() {
+    localStorage.removeItem("user");
+    window.location = "/codigo/index.html";
 }
