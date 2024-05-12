@@ -3,7 +3,7 @@ const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqb
 var personData = localStorage.getItem("user");
 var eventsList;
 
-if(personData && JSON.parse(personData).tipoUsuario === "promotor") {
+if(personData && JSON.parse(personData).tipoUsuario === "promotor" || JSON.parse(personData).tipoUsuario === "admin") {
     personData = JSON.parse(personData);
     loadUserInfo();
     getEvents();

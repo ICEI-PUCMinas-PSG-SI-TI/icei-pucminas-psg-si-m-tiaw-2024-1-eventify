@@ -14,7 +14,7 @@ if (localStorage.getItem("user")) {
 function loadUserInfo() {
     const loggedContent = document.getElementById('logged-content');
     if (personData && personData.id) {
-        if (personData.tipoUsuario === "promotor") {
+        if (personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
             loggedContent.innerHTML = `<a href="/codigo/pages/create-edit-event.html"> <h1 class="create-event-title">Criar um evento</h1> </a>`;
         }
 
@@ -27,7 +27,7 @@ function loadUserInfo() {
             ${userPhoto}
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/codigo/pages/profile.html">Perfil</a></li>
-                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>' : ''}
+                ${personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin" ? '<li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>' : ''}
                 <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>
         </div>`;
