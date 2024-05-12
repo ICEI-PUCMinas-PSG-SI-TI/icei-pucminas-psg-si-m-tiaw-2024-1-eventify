@@ -15,7 +15,7 @@ function loadUserInfo() {
     const loggedContent = document.getElementById('logged-content');
     if (personData && personData.id) {
         if (personData.tipoUsuario === "promotor") {
-            loggedContent.innerHTML = `<a href="/codigo/pages/create-event.html"> <h1 class="create-event-title">Criar um evento</h1> </a>`;
+            loggedContent.innerHTML = `<a href="/codigo/pages/create-edit-event.html"> <h1 class="create-event-title">Criar um evento</h1> </a>`;
         }
 
         const userPhoto = personData.foto
@@ -27,7 +27,7 @@ function loadUserInfo() {
             ${userPhoto}
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/codigo/pages/profile.html">Perfil</a></li>
-                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/codigo/pages/create-event.html">Criar evento</a></li>' : ''}
+                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>' : ''}
                 <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>
         </div>`;
@@ -55,7 +55,7 @@ function fillEvents(list) {
 
         list.forEach(eventData => {
             eventListElement.innerHTML += `
-                <div style="z-index:1;" class="event-card" onclick="eventClick(${eventData.id})">
+                <div style="z-index:1;" class="event-card" onclick="eventClick('${eventData.id}')">
                     <img src="${eventData.imagem}" alt="Imagem do evento">
                     <div class="event-description">
                         <div style="display: flex;align-items: flex-start;justify-content: space-between;">

@@ -1,6 +1,6 @@
 const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
 
-var personData = localStorage.getItem("userData");
+var personData = localStorage.getItem("user");
 var eventsList;
 
 if(personData && JSON.parse(personData).tipoUsuario === "promotor") {
@@ -19,12 +19,12 @@ function loadUserInfo() {
             : `<div data-bs-toggle="dropdown" class="user-photo">${personData.nome.slice(0, 1)}</div>`;
 
         loggedContent.innerHTML = `
-        <a href="/codigo/pages/create-event.html"> <h1 class="create-event-title">Criar um evento</h1> </a>
+        <a href="/codigo/pages/create-edit-event.html"> <h1 class="create-event-title">Criar um evento</h1> </a>
         <div class="dropdown">
             ${userPhoto}
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/codigo/pages/profile.html">Perfil</a></li>
-                <li><a class="dropdown-item" href="/codigo/pages/create-event.html">Criar evento</a></li>
+                <li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>
                 <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>
         </div>`;
@@ -52,7 +52,7 @@ function fillEvents(list) {
 
         list.forEach(eventData => {
             eventListElement.innerHTML += `
-                <div style="z-index:1;" class="event-card" onclick="eventClick(${eventData.id})">
+                <div style="z-index:1;" class="event-card" onclick="eventClick('${eventData.id}')">
                     <img src="${eventData.imagem}" alt="Imagem do evento">
                     <div class="event-description">
                         <div style="display: flex;align-items: flex-start;justify-content: space-between;">
