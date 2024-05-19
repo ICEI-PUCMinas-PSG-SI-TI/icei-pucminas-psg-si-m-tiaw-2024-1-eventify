@@ -5,10 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/common.css">
     <link rel="stylesheet" href="../assets/css/event.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/common.css">
     <title>Eventify - </title>
 </head>
 <body>
-    
+    <header>
+        <div class="header-separeted-content">
+            <i class="fa fa-align-justify fa-2x menu-icon" style="color: #192D37;" onclick="toggleAside()"></i>
+            <a href="/codigo/index.html" class="header-logo"><img src="assets/images/logo (2).png"
+                    alt="EVENTIFY logo"></a>
+        </div>
+        <div id="logged-content" class="header-separeted-content"></div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card bg-secondary text-light" style="max-width: 30rem;">
+                    <img id="imagem" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text" id="data">Data: 27 de Setembro de 2024</p>
+                        <p class="card-text" id="horario">Horário: 13:30</p>
+                        <p class="card-text" id="local">Local: Av. Afonso Pena, 1321 - Centro, Belo Horizonte - MG, 30130-002</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                        <h5>Descrição do Evento</h5>
+                        <p id="descricao">"Romeu e Julieta", a icônica obra de William Shakespeare, é uma história de amor proibido entre dois jovens de famílias rivais em Verona. Seu romance ardente é marcado por desventuras, mal-entendidos e um trágico destino. A peça cativa a audiência, explorando temas como paixão, destino e as consequências da divisão e ódio entre as famílias.</p>
+                        <h5><br>Adquira seus Ingressos em:</h5>
+                        <a href="#" class="btn btn-primary mr-2">Comprar Ingressos</a>
+                        <h5><br><br>Saiba mais em:</h5>
+                        <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../assets/js/event.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
