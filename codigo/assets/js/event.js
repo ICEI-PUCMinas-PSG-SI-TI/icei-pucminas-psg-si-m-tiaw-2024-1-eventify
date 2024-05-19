@@ -1,10 +1,20 @@
 const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
 
+if (!window.location.search || !window.location.search.includes("ev=")) window.location = "/codigo/index.html";
+
 var personData;
 var eventData;
+var urlEvent = window.location.search.replaceAll("?ev=", "");
 
 if (localStorage.getItem("user")) {
     personData = JSON.parse(localStorage.getItem("user"));
+
+    if (personData.tipoUsuario === "admin" ||
+        (personData.tipoUsuario === "promotor" && personData.eventosCriados && personData.eventosCriados.length &&
+        personData.eventosCriados.some(evento => evento.id === urlEvent))
+    ) {
+        document.getElementById('excluirEventoBotao').style.display = 'block';
+    }
 }
 
 loadUserInfo();
@@ -36,20 +46,20 @@ function loadUserInfo() {
 }
 
 function loadEventData() {
-    if (window.location.search) {
-        const eventId = window.location.search.replaceAll("?ev=", "");
-        fetch(baseApiUrl + "eventos/" + eventId)
-            .then(function (response) { return response.json() })
-            .then(function (data) {
+    fetch(baseApiUrl + "eventos/" + urlEvent)
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+            if (data && data.id) {
                 eventData = data;
                 fillEvent();
-
-
-            })
-            .catch(error => {
-                alert('Erro ao ler eventos via API JSONServer');
-            });
-    }
+            } else {
+                alert("Evento não encontrado.");
+                window.location = "/codigo/index.html";
+            }
+        })
+        .catch(error => {
+            alert('Erro ao ler eventos via API JSONServer');
+        });
 }
 
 function fillEvent() {
@@ -66,4 +76,56 @@ function fillEvent() {
 
     document.getElementById('maisInfo').innerHTML = eventData.saibaMais;
     document.getElementById('maisInfo').href = eventData.saibaMais;
+}
+
+function excluirEvento() {
+    fetch(baseApiUrl + "eventos/" + urlEvent, { method: 'DELETE' })
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+            let novaLista;
+            if (personData.eventosCriados && personData.eventosCriados.length &&
+                personData.eventosCriados.some(evento => evento.id === urlEvent)
+            ) {
+                novaLista = personData.eventosCriados.filter(evento => evento.id !== urlEvent);
+                personData.eventosCriados = novaLista;
+                localStorage.setItem("user", JSON.stringify(personData));
+                removerReferencia(personData.id, novaLista);
+            } else {
+                fetch(baseApiUrl + "pessoas/" + eventData.promotorId)
+                    .then(function (response) { return response.json() })
+                    .then(function (data) {
+                        novaLista = data.eventosCriados.filter(evento => evento.id !== urlEvent);
+                        removerReferencia(data.id, novaLista);
+                    })
+                    .catch(error => {
+                        alert('Erro ao buscar promotor via API JSONServer');
+                    });
+            }
+        })
+        .catch(error => {
+            alert('Erro ao excluir evento via API JSONServer');
+        });
+}
+
+function removerReferencia(id, lista) {
+    fetch(baseApiUrl + "pessoas/" + id, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "eventosCriados": lista
+        })
+    })
+        .then(() => {
+            window.location = "/codigo/index.html";
+        })
+        .catch(error => {
+            alert('Erro ao atualizar eventos criados via API JSONServer.');
+        });
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location = "/codigo/index.html";
 }
