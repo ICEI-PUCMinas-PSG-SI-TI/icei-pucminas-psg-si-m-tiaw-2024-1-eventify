@@ -9,6 +9,7 @@ body {
 }
 
 #aside-filter {
+    overflow-y: auto;
     padding: 32px 16px;
     display: none;
     flex-direction: column;
