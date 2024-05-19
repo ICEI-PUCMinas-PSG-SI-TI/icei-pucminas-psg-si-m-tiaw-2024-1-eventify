@@ -203,19 +203,19 @@ function filter() {
         }
 
         if (nameEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.nome && eventData.nome.toLowerCase().includes(nameEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.nome && eventData.nome.trim().toLowerCase().includes(nameEl.value.trim().toLowerCase()));
         }
 
         if (cityEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.toLowerCase().includes(cityEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.trim().toLowerCase().includes(cityEl.value.trim().toLowerCase()));
         }
 
         if (dateEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.data && eventData.data.toLowerCase().includes(dateEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.data && eventData.data.trim().toLowerCase().includes(dateEl.value.trim().toLowerCase()));
         }
 
         if (placeEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.toLowerCase().includes(placeEl.value));
+            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.trim().toLowerCase().includes(placeEl.value.trim().toLowerCase()));
         }
 
         fillEvents(filteredEvents);
