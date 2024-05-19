@@ -38,15 +38,13 @@ function loadUserInfo() {
 function loadEventData() {
     if (window.location.search) {
         const eventId = window.location.search.replaceAll("?ev=", "");
-
-
         fetch(baseApiUrl + "eventos/" + eventId)
             .then(function (response) { return response.json() })
             .then(function (data) {
                 eventData = data;
                 fillEvent();
 
-                
+
             })
             .catch(error => {
                 alert('Erro ao ler eventos via API JSONServer');
@@ -55,12 +53,17 @@ function loadEventData() {
 }
 
 function fillEvent() {
-    document.getElementById('descricao').innerHTML=eventData.descricao;
-    document.getElementById('data').innerHTML="Data: " + eventData.data;
-    document.getElementById('horario').innerHTML="Horário: " + eventData.horario;
-    document.getElementById('local').innerHTML="Local: " + eventData.local;
-    document.getElementById('imagem').scr=eventData.imagem
+    document.getElementById('nome').innerHTML = eventData.nome;
+    document.getElementById('imagem').src = eventData.imagem;
+    document.getElementById('data').innerHTML = "<strong>Data:</strong> " + eventData.data;
+    document.getElementById('horario').innerHTML = "<strong>Horário:</strong> " + eventData.horario;
+    document.getElementById('local').innerHTML = "<strong>Local:</strong> " + eventData.local;
 
+    document.getElementById('descricao').innerHTML = eventData.descricao;
+
+    document.getElementById('ingresso').innerHTML = eventData.vendaDeIngressos;
+    document.getElementById('ingresso').href = eventData.vendaDeIngressos;
+
+    document.getElementById('maisInfo').innerHTML = eventData.saibaMais;
+    document.getElementById('maisInfo').href = eventData.saibaMais;
 }
-
-

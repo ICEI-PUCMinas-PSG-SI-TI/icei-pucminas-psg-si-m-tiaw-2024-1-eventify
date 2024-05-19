@@ -7,7 +7,7 @@ if (localStorage.getItem("user")) {
     personData = JSON.parse(localStorage.getItem("user"));
 }
 
-loadUserInfo()
+loadUserInfo();
 getEvents();
 
 function getEvents() {
