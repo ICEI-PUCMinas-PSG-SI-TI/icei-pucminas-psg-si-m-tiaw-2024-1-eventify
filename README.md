@@ -8,7 +8,7 @@ O objetivo geral deste projeto é criar de um portal que apresente ferramentas q
 * Felipe Rodrigues Roque
 * Gabriel Alves Reis
 * Gustavo Coelho de Mendonça
-* Rogério Dias
+* Rogério Gabriel Lima Dias
 * Tiago dos Reis Gomes
 * Wagner Alexsander de Carvalho Viana
 
