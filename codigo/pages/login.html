@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Eventify - login</title>
 </head>
+
 <body>
     <main class="login-main">
         <div class="login-logo">
@@ -28,6 +30,18 @@
                 <i class="fa fa-arrow-left fa-2x" onclick="showSignInForm()"></i>
                 <h1>Cadastro</h1>
 
+                <label>Eu sou *</label>
+                <div class="check-form-button">
+                    <input type="radio" id="user" value="user" name="tipoUsuario"
+                        onclick="changeUserType(this.value)" />
+                    <label for="user">Usuário</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="radio" id="promotor" value="promotor" name="tipoUsuario"
+                        onclick="changeUserType(this.value)" />
+                    <label for="promotor">Promotor</label>
+                </div>
+
                 <label>Nome *</label>
                 <input class="text-form-button" name="nome" type="text">
 
@@ -37,34 +51,41 @@
                 <label>E-mail *</label>
                 <input class="text-form-button" name="email" type="text">
 
-                <label>Interesses *</label>
-                <div class="check-form-button">
-                    <input type="checkbox" id="show" value="show" name="interesses"/>
-                    <label for="show">Show ao vivo</label>
+                <div id="cnpj-elements" style="display: none; flex-direction: column;">
+                    <label class="cnpj-elements">CNPJ *</label>
+                    <input class="text-form-button cnpj-elements" name="cnpj" type="text" placeholder="00.000.000/0000-00" maxlength="18" onkeyup="cnpjMask(this)">
                 </div>
-                <div class="check-form-button botton-input">
-                    <input type="checkbox" id="festival" value="festival" name="interesses"/>
-                    <label for="festival">Festival</label>
-                </div>
-                <div class="check-form-button botton-input">
-                    <input type="checkbox" id="theater" value="teatro" name="interesses"/>
-                    <label for="theater">Teatro</label>
-                </div>
-                <div class="check-form-button botton-input">
-                    <input type="checkbox" id="museum" value="museu" name="interesses"/>
-                    <label for="museum">Museu</label>
-                </div>
-                <div class="check-form-button botton-input">
-                    <input type="checkbox" id="party" value="festa" name="interesses"/>
-                    <label for="party">Festa</label>
-                </div>
-                <div class="check-form-button botton-input">
-                    <input type="checkbox" id="bar" value="bar" name="interesses"/>
-                    <label for="bar">Bar & Cultura</label>
-                </div>
-                <div class="check-form-button botton-input">
-                    <input type="checkbox" id="coffe" value="café" name="interesses"/>
-                    <label for="coffe">Café</label>
+
+                <div id="interest-elements" style="display: none; flex-direction: column;">
+                    <label id="interest-label">Interesses *</label>
+                    <div class="check-form-button">
+                        <input type="checkbox" id="show" value="show" name="interesses" />
+                        <label for="show">Show ao vivo</label>
+                    </div>
+                    <div class="check-form-button botton-input">
+                        <input type="checkbox" id="festival" value="festival" name="interesses" />
+                        <label for="festival">Festival</label>
+                    </div>
+                    <div class="check-form-button botton-input">
+                        <input type="checkbox" id="theater" value="teatro" name="interesses" />
+                        <label for="theater">Teatro</label>
+                    </div>
+                    <div class="check-form-button botton-input">
+                        <input type="checkbox" id="museum" value="museu" name="interesses" />
+                        <label for="museum">Museu</label>
+                    </div>
+                    <div class="check-form-button botton-input">
+                        <input type="checkbox" id="party" value="festa" name="interesses" />
+                        <label for="party">Festa</label>
+                    </div>
+                    <div class="check-form-button botton-input">
+                        <input type="checkbox" id="bar" value="bar" name="interesses" />
+                        <label for="bar">Bar & Cultura</label>
+                    </div>
+                    <div class="check-form-button botton-input">
+                        <input type="checkbox" id="coffe" value="café" name="interesses" />
+                        <label for="coffe">Café</label>
+                    </div>
                 </div>
 
                 <label>Login *</label>
@@ -76,16 +97,6 @@
                 <label>Repetir senha *</label>
                 <input class="text-form-button" type="password" name="repetirSenha" type="text">
 
-                <label>Eu sou *</label>
-                <div class="check-form-button">
-                    <input type="radio" id="user" value="user" name="tipoUsuario"/>
-                    <label for="user">Usuário</label>
-                </div>
-                <div class="check-form-button botton-input">
-                    <input type="radio" id="promotor" value="promotor" name="tipoUsuario"/>
-                    <label for="promotor">Promotor</label>
-                </div>
-
                 <button class="primary-button" onclick="signUp()">Cadastrar</button>
             </form>
         </div>
@@ -93,4 +104,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../assets/js/login.js"></script>
 </body>
+
 </html>

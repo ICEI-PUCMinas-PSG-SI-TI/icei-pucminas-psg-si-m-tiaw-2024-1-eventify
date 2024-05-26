@@ -97,6 +97,15 @@ function createEditEventifyEvent() {
             return true;
         });
 
+        const eventDate = new Date(eventData.data.slice(3,5) + "/" + eventData.data.slice(0,2) + "/" + eventData.data.slice(-4));
+        eventDate.setHours(eventData.horario.slice(0,2));
+        eventDate.setMinutes(eventData.horario.slice(-2));
+
+        if(eventDate < new Date()) {
+            alert("A data do evento não pode ser anterior à data atual.");
+            return;
+        }
+
         if (!hasError) {
             // Atualiza evento
             if (editEvent && editEvent.id) {
@@ -112,7 +121,7 @@ function createEditEventifyEvent() {
                     body: JSON.stringify(eventData),
                 })
                     .then(function (response) { return response.json() })
-                    .then(function (data) { 
+                    .then(function (data) {
                         window.location = "/codigo/pages/event.html?ev=" + eventData.id;
                     })
                     .catch(error => {
@@ -180,4 +189,26 @@ function generateUUID() { // Public Domain/MIT
         }
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
+}
+
+function dateMask(el) {
+    if ((el.value.length === 3 || el.value.length === 6)) {
+        if (el.value.slice(-1) !== '/' && !(/[0-9]/g).test(el.value.slice(-1))) el.value = el.value.slice(0, el.value.length - 1)
+    } else if (!(/[0-9]/g).test(el.value.slice(-1))) {
+        el.value = el.value.slice(0, el.value.length - 1);
+    }
+
+    el.value = el.value
+        .replace(/^(\d{2})(\d)/, "$1/$2")
+        .replace(/^(\d{2})\/(\d{2})(\d)/, "$1/$2/$3");
+}
+
+function timeMask(el) {
+    if (el.value.length === 3) {
+        if (el.value.slice(-1) !== ':' && !(/[0-9]/g).test(el.value.slice(-1))) el.value = el.value.slice(0, el.value.length - 1)
+    } else if (!(/[0-9]/g).test(el.value.slice(-1))) {
+        el.value = el.value.slice(0, el.value.length - 1);
+    }
+
+    el.value = el.value.replace(/^(\d{2})(\d)/, "$1:$2");
 }

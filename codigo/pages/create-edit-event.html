@@ -37,12 +37,12 @@
 
             <div class="input-container">
                 <label>Data *</label>
-                <input class="text-form-button" name="data" type="text" placeholder="DD/MM/AAAA">
+                <input class="text-form-button" name="data" type="text" placeholder="DD/MM/AAAA" maxlength="10" onkeyup="dateMask(this)">
             </div>
 
             <div class="input-container">
                 <label>Horário *</label>
-                <input class="text-form-button" name="horario" type="text" placeholder="HH:MM">
+                <input class="text-form-button" name="horario" type="text" placeholder="HH:MM" maxlength="5" onkeyup="timeMask(this)">
             </div>
 
             <div class="input-container">

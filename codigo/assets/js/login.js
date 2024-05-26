@@ -1,5 +1,23 @@
 const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
 
+function cnpjMask(el) {
+    if ((el.value.length === 3 || el.value.length === 7)) {
+        if (el.value.slice(-1) !== '.' && !(/[0-9]/g).test(el.value.slice(-1))) el.value = el.value.slice(0, el.value.length - 1);
+    } else if (el.value.length === 11) {
+        if (el.value.slice(-1) !== '/' && !(/[0-9]/g).test(el.value.slice(-1))) el.value = el.value.slice(0, el.value.length - 1);
+    } else if (el.value.length === 16) {
+        if (el.value.slice(-1) !== '-' && !(/[0-9]/g).test(el.value.slice(-1))) el.value = el.value.slice(0, el.value.length - 1);
+    } else if (!(/[0-9]/g).test(el.value.slice(-1))) {
+        el.value = el.value.slice(0, el.value.length - 1);
+    }
+
+    el.value = el.value
+        .replace(/^(\d{2})(\d)/, "$1.$2")
+        .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/\.(\d{3})(\d)/, ".$1/$2")
+        .replace(/(\d{4})(\d)/, "$1-$2");
+}
+
 function showSignUpForm() {
     document.getElementById('sign-in-form').style.display = "none";
     document.getElementById('sign-up-form').style.display = "flex";
@@ -8,6 +26,15 @@ function showSignUpForm() {
 function showSignInForm() {
     document.getElementById('sign-in-form').style.display = "flex";
     document.getElementById('sign-up-form').style.display = "none";
+}
+
+function changeUserType(name) {
+    const interestsElements = document.getElementById('interest-elements');
+    if (interestsElements.style.display === 'none') interestsElements.style.display = 'flex';
+
+    document.getElementById('cnpj-elements').style.display = name === "user" ? "none" : "flex";
+
+    document.getElementById('interest-label').innerHTML = name === "user" ? "Interesses *" : "Tipos de evento *";
 }
 
 function signIn() {
@@ -52,18 +79,30 @@ function signUp() {
 
     let hasError = false;
     let hasInterests = false;
-    let hasTypeOfuser = false;
 
     if (formValue && formValue.length) {
+        const userType = formValue.find(el => el.name === 'tipoUsuario');
+
+        if (!userType || !userType.value) {
+            alert("O campo \"Eu sou\" é obrigatório.");
+            return;
+        }
+
         formValue.every(field => {
             if (field.value === '') {
-                alert("O campo \"" + field.name.charAt(0).toUpperCase() + field.name.slice(1) + "\" é obrigatório.");
-                hasError = true;
-                return false;
+                if (field.name !== 'cnpj' || (field.name === 'cnpj' && userType.value === 'promotor')) {
+                    alert("O campo \"" + field.name.charAt(0).toUpperCase() + field.name.slice(1) + "\" é obrigatório.");
+                    hasError = true;
+                    return false;
+                }
             }
 
             if (field.name === "email" && !(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.([a-z]+))?$/i).test(field.value)) {
                 alert("Favor inserir um e-mail válido.");
+                hasError = true;
+                return false;
+            } else if (userType.value === 'promotor' && field.name === "cnpj" && !validarCNPJ(field.value)) {
+                alert("Favor inserir um CNPJ válido.");
                 hasError = true;
                 return false;
             } else if (field.name === "interesses") {
@@ -73,9 +112,6 @@ function signUp() {
                     userData[field.name] = [field.value];
                 }
                 hasInterests = true;
-            } else if (field.name === "tipoUsuario") {
-                userData[field.name] = field.value;
-                hasTypeOfuser = true;
             } else if (field.name !== "Repetir senha") {
                 userData[field.name] = field.value;
             }
@@ -83,50 +119,45 @@ function signUp() {
             return true;
         });
 
-        if (!hasError && !hasInterests) alert("O campo \"Interesses\" é obrigatório.");
-        if (!hasError && hasInterests && !hasTypeOfuser) alert("O campo \"Eu sou\" é obrigatório.");
+        if (!hasError && !hasInterests) {
+            if (userType.value === 'promotor') alert("O campo \"Tipos de evento\" é obrigatório.");
+            else alert("O campo \"Interesses\" é obrigatório.");
+        }
 
-        if (!hasError && hasInterests && hasTypeOfuser && userData["senha"] !== userData["repetirSenha"]) {
+        if (!hasError && hasInterests && userData["senha"] !== userData["repetirSenha"]) {
             alert("As senhas devem ser iguais.");
             hasError = true;
         }
 
-        if (!hasError && hasInterests && hasTypeOfuser && userData) {
-            fetch(baseApiUrl + "pessoas")
+        if (!hasError && hasInterests && userData) {
+            fetch(baseApiUrl + "pessoas?login=" + userData.login)
                 .then(function (response) { return response.json() })
                 .then(function (data) {
-                    let registeredUser = data.find(person => person.login === userData.login);
-
-                    if (registeredUser && registeredUser.id) {
+                    if (data && data.length) {
                         alert("Já existe um usuário cadastrado com esse login.");
                     } else {
-                        userData.id = generateUUID();
-                        userData.foto = "";
-                        userData.eventosFavoritos = [];
-                        userData.eventosCriados = [];
+                        // if (userType.value === 'promotor') {
+                        //     fetch("https://www.receitaws.com.br/v1/cnpj/" + userData.cnpj.replace(/\D/g, ""), {
+                        //         headers: {
+                        //             'Content-Type': 'application/json',
+                        //         }
+                        //     })
+                        //         .then(function (response) { return response.json() })
+                        //         .then(function (data) {
+                        //             if (data && data.situacao === "ATIVA") {
+                        //                 createUser(userData);
+                        //             } else {
+                        //                 alert('O CNPJ não foi encontrado ou não está ativo');
+                        //             }
+                        //         })
+                        //         .catch(error => {
+                        //             alert('Erro ao buscar CNPJ.');
+                        //         });
+                        // } else {
+                        //     createUser(userData);
+                        // }
 
-                        delete userData.repetirSenha;
-
-                        // Cria o novo usuário
-                        fetch(baseApiUrl + "pessoas", {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(userData),
-                        })
-                            .then(function (response) { return response.json() })
-                            .then(function (data) {
-                                delete userData.login;
-                                delete userData.senha;
-
-                                localStorage.setItem("user", JSON.stringify(userData));
-
-                                window.location = "/codigo/index.html";
-                            })
-                            .catch(error => {
-                                alert('Erro ao criar usuário via API JSONServer.');
-                            });
+                        createUser(userData);
                     }
                 })
                 .catch(error => {
@@ -134,6 +165,36 @@ function signUp() {
                 });
         }
     }
+}
+
+function createUser(userData) {
+    userData.id = generateUUID();
+    userData.foto = "";
+    userData.eventosFavoritos = [];
+    userData.eventosCriados = [];
+
+    delete userData.repetirSenha;
+
+    // Cria o novo usuário
+    fetch(baseApiUrl + "pessoas", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+    })
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+            delete userData.login;
+            delete userData.senha;
+
+            localStorage.setItem("user", JSON.stringify(userData));
+
+            window.location = "/codigo/index.html";
+        })
+        .catch(error => {
+            alert('Erro ao criar usuário via API JSONServer.');
+        });
 }
 
 function generateUUID() { // Public Domain/MIT
@@ -150,4 +211,42 @@ function generateUUID() { // Public Domain/MIT
         }
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
+}
+
+function validarCNPJ(cnpj) {
+    cnpj = cnpj.replace(/[^\d]+/g, '');
+    if (cnpj == '' || cnpj.length != 14) return false;
+
+    // Valida DVs
+    let tamanho = cnpj.length - 2
+    let numeros = cnpj.substring(0, tamanho);
+    let digitos = cnpj.substring(tamanho);
+    let soma = 0;
+    let pos = tamanho - 7;
+
+    for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(0))
+        return false;
+
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0, tamanho);
+    soma = 0;
+    pos = tamanho - 7;
+    for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitos.charAt(1))
+        return false;
+
+    return true;
 }
