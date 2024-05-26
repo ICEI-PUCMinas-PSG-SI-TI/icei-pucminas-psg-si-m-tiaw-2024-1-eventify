@@ -27,7 +27,7 @@
 
 .form-container {
     width: 90%;
-    
+
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -64,7 +64,7 @@
         height: 32px;
         box-shadow: 0px 4px 5px #D9D9D9;
 
-        @media (max-width: 400px) { 
+        @media (max-width: 400px) {
             width: 90%;
         }
     }
@@ -80,11 +80,15 @@
     }
 
     .primary-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border: 1px solid #D9D9D9;
         background-color: #192D37;
         box-shadow: 0px 4px 5px #D9D9D9;
         color: white;
     }
+
     .secondary-button {
         border: 1px solid white;
         background-color: white;
@@ -131,5 +135,39 @@
         font-size: 24px;
         margin: 0;
         text-align: center;
+    }
+}
+
+.loader {
+    border: 8px solid transparent;
+    border-radius: 50%;
+    border-top: 8px solid white;
+    border-right: 8px solid white;
+    border-bottom: 8px solid white;
+    width: 20px;
+    height: 20px;
+    -webkit-animation: spin 1.5s linear infinite;
+    /* Safari */
+    animation: spin 1.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }

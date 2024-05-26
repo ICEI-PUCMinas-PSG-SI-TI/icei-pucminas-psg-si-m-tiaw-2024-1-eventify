@@ -50,6 +50,8 @@ function signIn() {
         }
 
         if (!hasError) {
+            document.getElementById('signInButton').innerHTML = `<div class="loader"></div>`;
+
             fetch(baseApiUrl + "pessoas")
                 .then(function (response) { return response.json() })
                 .then(function (data) {
@@ -67,6 +69,7 @@ function signIn() {
                     }
                 })
                 .catch(error => {
+                    document.getElementById('signInButton').innerHTML = "Entrar";
                     alert('Erro ao ler eventos via API JSONServer');
                 });
         }
@@ -130,6 +133,8 @@ function signUp() {
         }
 
         if (!hasError && hasInterests && userData) {
+            document.getElementById('signUpButton').innerHTML = `<div class="loader"></div>`;
+
             fetch(baseApiUrl + "pessoas?login=" + userData.login)
                 .then(function (response) { return response.json() })
                 .then(function (data) {
@@ -161,6 +166,7 @@ function signUp() {
                     }
                 })
                 .catch(error => {
+                    document.getElementById('signUpButton').innerHTML = "Cadastrar";
                     alert('Erro ao ler eventos via API JSONServer');
                 });
         }
@@ -193,6 +199,7 @@ function createUser(userData) {
             window.location = "/codigo/index.html";
         })
         .catch(error => {
+            document.getElementById('signInButton').innerHTML = "Cadastrar";
             alert('Erro ao criar usuário via API JSONServer.');
         });
 }

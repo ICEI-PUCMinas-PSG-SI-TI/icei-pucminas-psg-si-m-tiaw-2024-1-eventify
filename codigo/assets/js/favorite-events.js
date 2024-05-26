@@ -35,14 +35,22 @@ function loadUserInfo() {
 }
 
 function getEvents() {
+    document.getElementById('page-title').style.display = "none";
+    document.getElementById('loadSpinner').style.display = "flex";
+
     fetch(baseApiUrl + "eventos")
         .then(function (response) { return response.json() })
         .then(function (data) {
+            document.getElementById('page-title').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
+
             eventsList = data.filter(eventData =>
                 personData.eventosFavoritos.some(favoriteEvent => favoriteEvent.id === eventData.id));
             fillEvents(eventsList);
         })
         .catch(error => {
+            document.getElementById('page-title').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
             alert('Erro ao ler eventos via API JSONServer');
         });
 }

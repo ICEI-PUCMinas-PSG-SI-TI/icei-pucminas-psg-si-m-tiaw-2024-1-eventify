@@ -22,27 +22,29 @@
     </header>
 
     <main id="main-container">
-        <h1 id="page-title" class="page-main-title">Cadastrar evento: </h1>
+        <h1 id="page-title" class="page-main-title" style="display: none;">Cadastrar evento: </h1>
 
-        <form id="create-edit-form" onsubmit="return false;">
+        <form id="create-edit-form" style="display: none;" onsubmit="return false;">
             <div class="input-container">
                 <label>Nome *</label>
                 <input class="text-form-button" name="nome" type="text">
             </div>
 
             <div class="input-container">
-                <label>Imagem *</label>
-                <input class="text-form-button" name="imagem" type="text">
+                <label id="imageLabel">Imagem *</label>
+                <input name="imagem" type="file" onchange="readFile(this)">
             </div>
 
             <div class="input-container">
                 <label>Data *</label>
-                <input class="text-form-button" name="data" type="text" placeholder="DD/MM/AAAA" maxlength="10" onkeyup="dateMask(this)">
+                <input class="text-form-button" name="data" type="text" placeholder="DD/MM/AAAA" maxlength="10"
+                    onkeyup="dateMask(this)">
             </div>
 
             <div class="input-container">
                 <label>Horário *</label>
-                <input class="text-form-button" name="horario" type="text" placeholder="HH:MM" maxlength="5" onkeyup="timeMask(this)">
+                <input class="text-form-button" name="horario" type="text" placeholder="HH:MM" maxlength="5"
+                    onkeyup="timeMask(this)">
             </div>
 
             <div class="input-container">
@@ -66,10 +68,17 @@
             </div>
 
             <div class="buttons-container">
-                <button id="create-edit-button" class="primary-button" onclick="createEditEventifyEvent()">Cadastrar</button>
+                <button id="create-edit-button" class="primary-button"
+                    onclick="createEditEventifyEvent()">Cadastrar </button>
                 <button class="secondary-button" onclick='window.location = "/codigo/index.html";'>Cancelar</button>
             </div>
         </form>
+
+        <div id="loadSpinner" style="height: 100%; display: none; justify-content: center; align-items: center;">
+            <div class="spinner-border text-dark" role="status" style="margin-top: 4px;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

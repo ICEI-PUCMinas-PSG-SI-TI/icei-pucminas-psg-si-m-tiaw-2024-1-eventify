@@ -22,7 +22,7 @@
                 <label for="senha">Senha</label>
                 <input class="text-form-button" name="senha" type="password">
 
-                <button class="primary-button" onclick="signIn()">Entrar</button>
+                <button id="signInButton" class="primary-button" onclick="signIn()">Entrar</button>
                 <button class="secondary-button" onclick="showSignUpForm()">Cadastrar</button>
             </form>
 
@@ -53,7 +53,8 @@
 
                 <div id="cnpj-elements" style="display: none; flex-direction: column;">
                     <label class="cnpj-elements">CNPJ *</label>
-                    <input class="text-form-button cnpj-elements" name="cnpj" type="text" placeholder="00.000.000/0000-00" maxlength="18" onkeyup="cnpjMask(this)">
+                    <input class="text-form-button cnpj-elements" name="cnpj" type="text"
+                        placeholder="00.000.000/0000-00" maxlength="18" onkeyup="cnpjMask(this)">
                 </div>
 
                 <div id="interest-elements" style="display: none; flex-direction: column;">
@@ -97,7 +98,7 @@
                 <label>Repetir senha *</label>
                 <input class="text-form-button" type="password" name="repetirSenha" type="text">
 
-                <button class="primary-button" onclick="signUp()">Cadastrar</button>
+                <button id="signUpButton" class="primary-button" onclick="signUp()">Cadastrar</button>
             </form>
         </div>
     </main>

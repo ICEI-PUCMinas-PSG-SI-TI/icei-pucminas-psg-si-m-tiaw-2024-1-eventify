@@ -11,7 +11,7 @@ if (localStorage.getItem("user")) {
 
     if (personData.tipoUsuario === "admin" ||
         (personData.tipoUsuario === "promotor" && personData.eventosCriados && personData.eventosCriados.length &&
-        personData.eventosCriados.some(evento => evento.id === urlEvent))
+            personData.eventosCriados.some(evento => evento.id === urlEvent))
     ) {
         document.getElementById('excluirEventoBotao').style.display = 'block';
     }
@@ -46,10 +46,15 @@ function loadUserInfo() {
 }
 
 function loadEventData() {
+    document.getElementById('pageContent').style.display = "none";
+    document.getElementById('loadSpinner').style.display = "flex";
+
     fetch(baseApiUrl + "eventos/" + urlEvent)
         .then(function (response) { return response.json() })
         .then(function (data) {
             if (data && data.id) {
+                document.getElementById('pageContent').style.display = "block";
+                document.getElementById('loadSpinner').style.display = "none";
                 eventData = data;
                 fillEvent();
             } else {
@@ -58,6 +63,8 @@ function loadEventData() {
             }
         })
         .catch(error => {
+            document.getElementById('pageContent').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
             alert('Erro ao ler eventos via API JSONServer');
         });
 }
@@ -79,6 +86,12 @@ function fillEvent() {
 }
 
 function excluirEvento() {
+    document.getElementById('excluirEventoBotao').innerHTML = `
+        <div class="spinner-border text-light" role="status" style="margin-top: 4px;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    `;
+
     fetch(baseApiUrl + "eventos/" + urlEvent, { method: 'DELETE' })
         .then(function (response) { return response.json() })
         .then(function (data) {
@@ -98,11 +111,13 @@ function excluirEvento() {
                         removerReferencia(data.id, novaLista);
                     })
                     .catch(error => {
+                        document.getElementById('excluirEventoBotao').innerHTML = "Excluir evento";
                         alert('Erro ao buscar promotor via API JSONServer');
                     });
             }
         })
         .catch(error => {
+            document.getElementById('excluirEventoBotao').innerHTML = "Excluir evento";
             alert('Erro ao excluir evento via API JSONServer');
         });
 }
@@ -121,6 +136,7 @@ function removerReferencia(id, lista) {
             window.location = "/codigo/index.html";
         })
         .catch(error => {
+            document.getElementById('excluirEventoBotao').innerHTML = "Excluir evento";
             alert('Erro ao atualizar eventos criados via API JSONServer.');
         });
 }

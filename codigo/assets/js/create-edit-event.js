@@ -1,5 +1,6 @@
 const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
 
+var eventImageBase64;
 var personData = localStorage.getItem("user");
 var editEvent;
 if (personData && JSON.parse(personData).tipoUsuario === "promotor" || JSON.parse(personData).tipoUsuario === "admin") {
@@ -42,9 +43,16 @@ function loadEventData() {
         if (personData.eventosCriados && personData.eventosCriados.length &&
             personData.eventosCriados.some(evento => evento.id === eventId)
         ) {
+            document.getElementById('page-title').style.display = "none";
+            document.getElementById('loadSpinner').style.display = "flex";
+
             fetch(baseApiUrl + "eventos/" + eventId)
                 .then(function (response) { return response.json() })
                 .then(function (data) {
+                    document.getElementById('page-title').style.display = "block";
+                    document.getElementById('create-edit-form').style.display = "flex";
+                    document.getElementById('loadSpinner').style.display = "none";
+
                     editEvent = data;
                     fillForm();
                 })
@@ -55,12 +63,18 @@ function loadEventData() {
             window.location = "/codigo/index.html";
             alert("Evento inválido.")
         }
+    } else {
+        document.getElementById('page-title').style.display = "block";
+        document.getElementById('create-edit-form').style.display = "flex";
     }
 }
 
 function fillForm() {
     document.getElementById('page-title').innerHTML = "Editar evento: ";
     document.getElementById('create-edit-button').innerHTML = "Editar";
+    document.getElementById('imageLabel').innerHTML = "Alterar imagem (opcional)";
+
+    eventImageBase64 = editEvent.imagem;
 
     const inputs = document.getElementsByClassName('text-form-button');
 
@@ -97,21 +111,33 @@ function createEditEventifyEvent() {
             return true;
         });
 
-        const eventDate = new Date(eventData.data.slice(3,5) + "/" + eventData.data.slice(0,2) + "/" + eventData.data.slice(-4));
-        eventDate.setHours(eventData.horario.slice(0,2));
+        const eventDate = new Date(eventData.data.slice(3, 5) + "/" + eventData.data.slice(0, 2) + "/" + eventData.data.slice(-4));
+        eventDate.setHours(eventData.horario.slice(0, 2));
         eventDate.setMinutes(eventData.horario.slice(-2));
 
-        if(eventDate < new Date()) {
+        if (eventDate < new Date()) {
             alert("A data do evento não pode ser anterior à data atual.");
             return;
         }
 
+        if ((!editEvent || !editEvent.imagem) && !eventImageBase64) {
+            alert("A imagem do evento é obrigatória.");
+            hasError = true;
+        }
+
         if (!hasError) {
+            document.getElementById('create-edit-button').innerHTML = `
+                <div class="spinner-border text-light" role="status" style="margin-top: 4px;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            `;
+
             // Atualiza evento
             if (editEvent && editEvent.id) {
                 eventData.id = editEvent.id;
                 eventData.promotorId = personData.id;
                 eventData.comentarios = editEvent.comentarios;
+                eventData.imagem = eventImageBase64;
 
                 fetch(baseApiUrl + "eventos/" + eventData.id, {
                     method: 'PUT',
@@ -125,6 +151,7 @@ function createEditEventifyEvent() {
                         window.location = "/codigo/pages/event.html?ev=" + eventData.id;
                     })
                     .catch(error => {
+                        document.getElementById('create-edit-button').innerHTML = "Editar evento";
                         alert('Erro ao editar evento via API JSONServer.');
                     });
 
@@ -132,6 +159,7 @@ function createEditEventifyEvent() {
                 eventData.id = generateUUID();
                 eventData.promotorId = personData.id;
                 eventData.comentarios = [];
+                eventData.imagem = eventImageBase64;
 
                 // Cria novo evento
                 fetch(baseApiUrl + "eventos", {
@@ -164,6 +192,7 @@ function createEditEventifyEvent() {
                                 window.location = "/codigo/pages/event.html?ev=" + eventData.id;
                             })
                             .catch(error => {
+                                document.getElementById('create-edit-button').innerHTML = "Criar evento";
                                 alert('Erro ao atualizar usuário via API JSONServer.');
                             });
                     })
@@ -211,4 +240,15 @@ function timeMask(el) {
     }
 
     el.value = el.value.replace(/^(\d{2})(\d)/, "$1:$2");
+}
+
+function readFile(el) {
+    if (!el.files || !el.files[0]) return;
+
+    const FR = new FileReader();
+    FR.addEventListener("load", function (evt) {
+        eventImageBase64 = evt.target.result;
+    });
+
+    FR.readAsDataURL(el.files[0]);
 }

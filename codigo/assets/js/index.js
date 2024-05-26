@@ -11,13 +11,21 @@ loadUserInfo();
 getEvents();
 
 function getEvents() {
+    document.getElementById('events-list-title').style.display = "none";
+    document.getElementById('loadSpinner').style.display = "flex";
+
     fetch(baseApiUrl + "eventos")
         .then(function (response) { return response.json() })
         .then(function (data) {
+            document.getElementById('events-list-title').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
+
             eventsList = data;
             fillEvents(eventsList);
         })
         .catch(error => {
+            document.getElementById('events-list-title').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
             alert('Erro ao ler eventos via API JSONServer');
         });
 }
@@ -48,28 +56,35 @@ function loadUserInfo() {
 }
 
 function fillEvents(list) {
+    let hasFutureEvents = false;
+    document.getElementById('pastEventsAccordion').style.display = "none";
+
     const eventListElement = document.getElementById('events-list');
     eventListElement.innerHTML = "";
 
+    const pastEventsList = document.getElementById('past-events-list');
+    pastEventsList.innerHTML = "";
+
     if (list && list.length) {
         list.forEach(eventData => {
-            eventListElement.innerHTML += `
-                <div style="z-index:1;" class="event-card" onclick="eventClick('${eventData.id}')">
-                    <img src="${eventData.imagem}" alt="Imagem do evento" onerror="this.onerror=null; this.src='assets/images/login-background.jpg'">
-                    <div class="event-description">
-                        <div style="display: flex;align-items: flex-start;justify-content: space-between;">
-                            <h1>${eventData.nome}</h1>
-                            ${getFavEventIcon(eventData.id)}
-                        </div>
-                        <h2>${eventData.data} - ${eventData.horario}</h2>
-                        <p>${eventData.local}</p>
-                    </div>
-                </div>
-            `;
+            const eventDate = new Date(eventData.data.slice(3, 5) + "/" + eventData.data.slice(0, 2) + "/" + eventData.data.slice(-4));
+            eventDate.setHours(eventData.horario.slice(0, 2));
+            eventDate.setMinutes(eventData.horario.slice(-2));
+
+            if (eventDate > new Date()) {
+                hasFutureEvents = true;
+                eventListElement.innerHTML += formatEventContent(eventData);
+            } else {
+                document.getElementById('pastEventsAccordion').style.display = "block";
+                pastEventsList.style.display = "flex";
+                pastEventsList.innerHTML += formatEventContent(eventData);
+            }
         });
     } else {
-        eventListElement.innerHTML = `<h1>Infelizmente não temos eventos cadastrados. 😕</h1>`;
+        eventListElement.innerHTML = `<h1 style="margin-bottom: 16px;>Infelizmente não econtramos eventos para os próximos dias. 😕</h1>`;
     }
+
+    if(!hasFutureEvents) eventListElement.innerHTML = `<h1 style="margin-bottom: 16px;">Infelizmente não econtramos eventos para os próximos dias. 😕</h1>`;
 
     // toast
     if (personData && personData.eventosFavoritos && personData.eventosFavoritos.length && eventsList && eventsList.length) {
@@ -110,6 +125,22 @@ function fillEvents(list) {
             }
         }
     }
+}
+
+function formatEventContent(eventData) {
+    return `
+        <div style="z-index:1;" class="event-card" onclick="eventClick('${eventData.id}')">
+            <img src="${eventData.imagem}" alt="Imagem do evento" onerror="this.onerror=null; this.src='assets/images/login-background.jpg'">
+            <div class="event-description">
+                <div style="display: flex;align-items: flex-start;justify-content: space-between;">
+                    <h1>${eventData.nome}</h1>
+                    ${getFavEventIcon(eventData.id)}
+                </div>
+                <h2>${eventData.data} - ${eventData.horario}</h2>
+                <p>${eventData.local}</p>
+            </div>
+        </div>
+    `;
 }
 
 function getFavEventIcon(id) {

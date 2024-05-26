@@ -32,14 +32,21 @@ function loadUserInfo() {
 }
 
 function getEvents() {
-    fetch(baseApiUrl + "eventos")
+    document.getElementById('page-title').style.display = "none";
+    document.getElementById('loadSpinner').style.display = "flex";
+
+    fetch(baseApiUrl + "eventos?promotorId=" + personData.id)
         .then(function (response) { return response.json() })
         .then(function (data) {
-            eventsList = data.filter(eventData =>
-                personData.eventosCriados.some(favoriteEvent => favoriteEvent.id === eventData.id));
+            document.getElementById('page-title').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
+
+            eventsList = data;
             fillEvents(eventsList);
         })
         .catch(error => {
+            document.getElementById('page-title').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
             alert('Erro ao ler eventos via API JSONServer');
         });
 }
@@ -109,6 +116,9 @@ function favoriteEvent(event, id) {
             "eventosFavoritos": personData.eventosFavoritos
         }),
     })
+        .then(() => {
+            localStorage.setItem("user", JSON.stringify(personData));
+        })
         .catch(error => {
             alert('Erro ao favoritar evento via API JSONServer.');
         });
