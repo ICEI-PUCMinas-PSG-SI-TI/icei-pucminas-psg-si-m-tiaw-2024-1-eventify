@@ -40,8 +40,9 @@ function loadEventData() {
     if (window.location.search) {
         const eventId = window.location.search.replaceAll("?ev=", "");
 
-        if (personData.eventosCriados && personData.eventosCriados.length &&
-            personData.eventosCriados.some(evento => evento.id === eventId)
+        if (personData.tipoUsuario === 'admin' ||
+            (personData.eventosCriados && personData.eventosCriados.length &&
+                personData.eventosCriados.some(evento => evento.id === eventId))
         ) {
             document.getElementById('page-title').style.display = "none";
             document.getElementById('loadSpinner').style.display = "flex";
