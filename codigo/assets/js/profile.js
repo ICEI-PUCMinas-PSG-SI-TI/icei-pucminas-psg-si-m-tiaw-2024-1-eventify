@@ -5,7 +5,7 @@ var personData;
 if (localStorage.getItem("user")) {
     personData = JSON.parse(localStorage.getItem("user"));
 
-    if (personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
+    if(personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
         document.getElementById('myEventsButton').style.display = 'block';
     }
 } else {
@@ -34,8 +34,6 @@ function loadUserInfo() {
         <div class="dropdown">
             ${userPhoto}
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/codigo/pages/favorite-events.html">Eventos Favoritos</a></li>
-                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/codigo/pages/created-events.html">Meus eventos</a></li>' : ''}
                 ${personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin" ? '<li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>' : ''}
                 <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>
@@ -52,9 +50,44 @@ function loadProfileInfo() {
     document.getElementById('interests').value = personData.interesses;
 }
 
-// function editProfile() {
-//     const formValue = $('#create-edit-form').serializeArray();
-// }
+document.getElementById('editMyProfile').addEventListener('click', editProfile);
+
+function editProfile() {
+    document.getElementById('event-name').disabled = false;
+    document.getElementById('city').disabled = false;
+    document.getElementById('email').disabled = false;
+    document.getElementById('interests').disabled = false;
+    document.getElementById('saveMyProfile').style.display = 'inline-block';
+}
+
+document.getElementById('editMyPassword').addEventListener('click', editPassword);
+
+function editPassword() {
+    document.getElementById('password').disabled = false;
+    document.getElementById('saveMyProfile').style.display = 'inline-block';
+}
+
+document.getElementById('saveMyProfile').addEventListener('click', saveProfile);
+
+function saveProfile() {
+    personData.nome = document.getElementById('event-name').value;
+    personData.cidade = document.getElementById('city').value;
+    personData.email = document.getElementById('email').value;
+    personData.interesses = document.getElementById('interests').value;
+    //personData.login = document.getElementById('login').value;
+    personData.password = document.getElementById('password').value;
+
+    localStorage.setItem('user', JSON.stringify(personData));
+    alert('Salvo!');
+
+    document.getElementById('event-name').disabled = true;
+    document.getElementById('city').disabled = true;
+    document.getElementById('email').disabled = true;
+    document.getElementById('interests').disabled = true;
+    //document.getElementById('login').disabled = true;
+    document.getElementById('password').disabled = true;
+    document.getElementById('saveMyProfile').style.display = 'none';
+}
 
 function logout() {
     localStorage.removeItem("user");

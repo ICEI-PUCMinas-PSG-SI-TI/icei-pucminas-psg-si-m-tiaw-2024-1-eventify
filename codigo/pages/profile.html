@@ -32,7 +32,9 @@
             <div class="profile-pic-container" id="profilePic"></div>
 
             <div class="buttons">
-                <button class="button">Editar perfil</button>
+                <button type="button" id="editMyProfile" class="button">Editar perfil</button>
+                <button type="button" id="saveMyProfile" class="button" style="display:none;">Salvar</button>
+                <button type="button" id="editMyPassword" class="button">Editar Senha</button>
                 <a href="/codigo/pages/favorite-events.html" class="button">Eventos curtidos</a>
                 <a id="myEventsButton" href="/codigo/pages/created-events.html" class="button" style="display: none;">Meus Eventos</a>
             </div>
@@ -58,10 +60,10 @@
                 <input type="text" id="interests" name="interests" disabled><br>
             </div>
 
-            <div class="input-container">
+            <!--<div class="input-container">
                 <label for="login">Login:</label><br>
                 <input type="text" id="login" name="login" disabled value="***"><br>
-            </div>
+            </div>-->
 
             <div class="input-container">
                 <label for="password">Senha:</label><br>
