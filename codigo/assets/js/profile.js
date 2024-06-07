@@ -48,6 +48,11 @@ function loadProfileInfo() {
     document.getElementById('city').value = personData.cidade;
     document.getElementById('email').value = personData.email;
     document.getElementById('interests').value = personData.interesses;
+    document.getElementById('divName').style.display = 'inline-block';
+    document.getElementById('divCity').style.display = 'inline-block';
+    document.getElementById('divEmail').style.display = 'inline-block';
+    document.getElementById('divInterests').style.display = 'inline-block';
+    document.getElementById('saveMyProfile').style.display = 'none';
 }
 
 document.getElementById('editMyProfile').addEventListener('click', editProfile);
@@ -55,7 +60,7 @@ document.getElementById('editMyProfile').addEventListener('click', editProfile);
 function editProfile() {
     document.getElementById('event-name').disabled = false;
     document.getElementById('city').disabled = false;
-    document.getElementById('email').disabled = false;
+    //document.getElementById('email').disabled = false;
     document.getElementById('interests').disabled = false;
     document.getElementById('saveMyProfile').style.display = 'inline-block';
 }
@@ -63,6 +68,13 @@ function editProfile() {
 document.getElementById('editMyPassword').addEventListener('click', editPassword);
 
 function editPassword() {
+    document.getElementById('divName').style.display = 'none';
+    document.getElementById('divCity').style.display = 'none';
+    document.getElementById('divEmail').style.display = 'none';
+    document.getElementById('divInterests').style.display = 'none';
+    document.getElementById('divPassword').style.display = 'inline-block';
+    document.getElementById('divNewPassword').style.display = 'inline-block';
+    document.getElementById('divNewPasswordconfirm').style.display = 'inline-block';
     document.getElementById('password').disabled = false;
     document.getElementById('saveMyProfile').style.display = 'inline-block';
 }
@@ -72,9 +84,8 @@ document.getElementById('saveMyProfile').addEventListener('click', saveProfile);
 function saveProfile() {
     personData.nome = document.getElementById('event-name').value;
     personData.cidade = document.getElementById('city').value;
-    personData.email = document.getElementById('email').value;
+    //personData.email = document.getElementById('email').value;
     personData.interesses = document.getElementById('interests').value;
-    //personData.login = document.getElementById('login').value;
     personData.password = document.getElementById('password').value;
 
     localStorage.setItem('user', JSON.stringify(personData));
@@ -84,9 +95,18 @@ function saveProfile() {
     document.getElementById('city').disabled = true;
     document.getElementById('email').disabled = true;
     document.getElementById('interests').disabled = true;
-    //document.getElementById('login').disabled = true;
     document.getElementById('password').disabled = true;
+    document.getElementById('divName').style.display = 'inline-block';
+    document.getElementById('divCity').style.display = 'inline-block';
+    document.getElementById('divEmail').style.display = 'inline-block';
+    document.getElementById('divInterests').style.display = 'inline-block';
+    document.getElementById('divPassword').style.display = 'none';
+    document.getElementById('divNewPassword').style.display = 'none';
+    document.getElementById('divNewPasswordconfirm').style.display = 'none';
     document.getElementById('saveMyProfile').style.display = 'none';
+}
+function savePassword() {
+
 }
 
 function logout() {

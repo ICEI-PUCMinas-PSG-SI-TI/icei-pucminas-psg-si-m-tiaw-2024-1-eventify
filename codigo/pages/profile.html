@@ -32,30 +32,30 @@
             <div class="profile-pic-container" id="profilePic"></div>
 
             <div class="buttons">
-                <button type="button" id="editMyProfile" class="button">Editar perfil</button>
-                <button type="button" id="saveMyProfile" class="button" style="display:none;">Salvar</button>
+                <button type="button" id="editMyProfile" class="button">Editar informações pessoais</button>
+                <!--<button type="button" id="saveMyProfile" class="button" style="display:none;">Salvar</button>-->
                 <button type="button" id="editMyPassword" class="button">Editar Senha</button>
                 <a href="/codigo/pages/favorite-events.html" class="button">Eventos curtidos</a>
                 <a id="myEventsButton" href="/codigo/pages/created-events.html" class="button" style="display: none;">Meus Eventos</a>
             </div>
         </form>
         <form class="dados" onsubmit="return false;">
-            <div class="input-container">
+            <div  id="divName" style="display:none;" class="input-container">
                 <label for="event-name">Nome:</label><br>
                 <input type="text" id="event-name" name="event-name" disabled><br>
             </div>
 
-            <div class="input-container">
+            <div  id="divCity" style="display:none;" class="input-container">
                 <label for="city">Cidade:</label><br>
                 <input type="text" id="city" name="city" disabled><br>
             </div>
 
-            <div class="input-container">
+            <div  id="divEmail" style="display:none;" class="input-container">
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email" disabled><br>
             </div>
 
-            <div class="input-container">
+            <div id="divInterests" style="display:none;" class="input-container">
                 <label for="interests">Interesses:</label><br>
                 <input type="text" id="interests" name="interests" disabled><br>
             </div>
@@ -65,10 +65,22 @@
                 <input type="text" id="login" name="login" disabled value="***"><br>
             </div>-->
 
-            <div class="input-container">
-                <label for="password">Senha:</label><br>
-                <input type="password" id="password" name="password" disabled value="***"><br>
+            <div id="divPassword" style="display:none;" class="input-container">
+                <label for="password" >Senha Atual:</label><br>
+                <input type="password" id="password" name="password" value=""><br>
             </div>
+
+            <div id="divNewPassword" style="display:none;" class="input-container">
+                <label for="newPassword" >Digite sua nova senha:</label><br>
+                <input type="password" id="newPassword" name="newPassword" value=""><br>
+            </div>
+
+            <div id="divNewPasswordconfirm" style="display:none;" class="input-container">
+                <label for="newPasswordconfirm" >Confirme sua nova senha:</label><br>
+                <input type="password" id="newPasswordconfirm" name="newPasswordconfirm" value=""><br>
+            </div>
+
+            <button type="button" id="saveMyProfile" class="button" display="none">Salvar</button>
         </form>
     </main>
 
