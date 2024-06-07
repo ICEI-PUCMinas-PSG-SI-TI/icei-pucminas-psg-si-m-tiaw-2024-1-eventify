@@ -5,7 +5,7 @@ var personData;
 if (localStorage.getItem("user")) {
     personData = JSON.parse(localStorage.getItem("user"));
 
-    if(personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
+    if (personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
         document.getElementById('myEventsButton').style.display = 'block';
     }
 } else {
@@ -34,6 +34,8 @@ function loadUserInfo() {
         <div class="dropdown">
             ${userPhoto}
             <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/codigo/pages/favorite-events.html">Eventos Favoritos</a></li>
+                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/codigo/pages/created-events.html">Meus eventos</a></li>' : ''}
                 ${personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin" ? '<li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>' : ''}
                 <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>

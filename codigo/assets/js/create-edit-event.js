@@ -24,7 +24,8 @@ function loadUserInfo() {
             ${userPhoto}
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/codigo/pages/profile.html">Perfil</a></li>
-                <li><a class="dropdown-item" href="/codigo/pages/create-edit-event.html">Criar evento</a></li>
+                <li><a class="dropdown-item" href="/codigo/pages/favorite-events.html">Eventos Favoritos</a></li>
+                ${personData.tipoUsuario === "promotor" ? '<li><a class="dropdown-item" href="/codigo/pages/created-events.html">Meus eventos</a></li>' : ''}
                 <li style="cursor: pointer;" class="dropdown-item" onClick="logout()">Sair</li>
             </ul>
         </div>`;
