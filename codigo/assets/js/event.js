@@ -84,7 +84,8 @@ function fillEvent() {
     document.getElementById('imagem').src = eventData.imagem;
     document.getElementById('data').innerHTML = "<strong>Data:</strong> " + eventData.data;
     document.getElementById('horario').innerHTML = "<strong>Horário:</strong> " + eventData.horario;
-    document.getElementById('local').innerHTML = "<strong>Local:</strong> " + eventData.local;
+    document.getElementById('local').innerHTML = "<strong>Local:</strong> " + 
+        eventData.local + ", N." + eventData.numero + " - " + eventData.cep;
 
     document.getElementById('descricao').innerHTML = eventData.descricao;
 

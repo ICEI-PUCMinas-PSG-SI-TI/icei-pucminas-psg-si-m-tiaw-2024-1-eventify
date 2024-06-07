@@ -106,6 +106,10 @@ function createEditEventifyEvent() {
                 alert("Insira um horário válido com formato HH:MM");
                 hasError = true;
                 return false;
+            } else if (field.name === "cep" && !(/^[0-9]{5}-[0-9]{3}$/).test(field.value)) {
+                alert("Insira um CEP válido com formato 000000-000");
+                hasError = true;
+                return false;
             }
 
             eventData[field.name] = field.value;
@@ -242,6 +246,17 @@ function timeMask(el) {
     }
 
     el.value = el.value.replace(/^(\d{2})(\d)/, "$1:$2");
+}
+
+function cepMask(el) {
+    if (el.value.length === 6) {
+        if (el.value.slice(-1) !== '-' && !(/[0-9]/g).test(el.value.slice(-1))) el.value = el.value.slice(0, el.value.length - 1)
+    }
+    else if (!(/[0-9]/g).test(el.value.slice(-1))) {
+        el.value = el.value.slice(0, el.value.length - 1);
+    }
+
+    el.value = el.value.replace(/^(\d{5})(\d)/, "$1-$2");
 }
 
 function readFile(el) {

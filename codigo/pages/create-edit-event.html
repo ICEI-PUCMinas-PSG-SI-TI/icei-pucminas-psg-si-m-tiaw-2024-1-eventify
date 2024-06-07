@@ -49,8 +49,19 @@
             </div>
 
             <div class="input-container">
+                <label>CEP *</label>
+                <input class="text-form-button" name="cep" type="text" placeholder="00000-000" maxlength="9"
+                    onkeyup="cepMask(this)">
+            </div>
+
+            <div class="input-container">
                 <label>Local *</label>
                 <input class="text-form-button" name="local" type="text">
+            </div>
+
+            <div class="input-container">
+                <label>Número (endereço) *</label>
+                <input class="text-form-button" name="numero" type="text">
             </div>
 
             <div class="input-container">
@@ -69,8 +80,8 @@
             </div>
 
             <div class="buttons-container">
-                <button id="create-edit-button" class="primary-button"
-                    onclick="createEditEventifyEvent()">Cadastrar </button>
+                <button id="create-edit-button" class="primary-button" onclick="createEditEventifyEvent()">Cadastrar
+                </button>
                 <button class="secondary-button" onclick='window.location = "/codigo/index.html";'>Cancelar</button>
             </div>
         </form>
