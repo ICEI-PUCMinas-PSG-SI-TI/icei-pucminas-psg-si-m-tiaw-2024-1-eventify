@@ -141,27 +141,6 @@ function signUp() {
                     if (data && data.length) {
                         alert("Já existe um usuário cadastrado com esse login.");
                     } else {
-                        // if (userType.value === 'promotor') {
-                        //     fetch("https://www.receitaws.com.br/v1/cnpj/" + userData.cnpj.replace(/\D/g, ""), {
-                        //         headers: {
-                        //             'Content-Type': 'application/json',
-                        //         }
-                        //     })
-                        //         .then(function (response) { return response.json() })
-                        //         .then(function (data) {
-                        //             if (data && data.situacao === "ATIVA") {
-                        //                 createUser(userData);
-                        //             } else {
-                        //                 alert('O CNPJ não foi encontrado ou não está ativo');
-                        //             }
-                        //         })
-                        //         .catch(error => {
-                        //             alert('Erro ao buscar CNPJ.');
-                        //         });
-                        // } else {
-                        //     createUser(userData);
-                        // }
-
                         createUser(userData);
                     }
                 })
@@ -175,6 +154,7 @@ function signUp() {
 
 function createUser(userData) {
     userData.id = generateUUID();
+    userData.login = userData.email;
     userData.foto = "";
     userData.eventosFavoritos = [];
     userData.eventosCriados = [];
