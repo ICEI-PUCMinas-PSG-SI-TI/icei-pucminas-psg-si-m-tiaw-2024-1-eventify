@@ -53,6 +53,7 @@ function loadProfileInfo() {
     document.getElementById('divEmail').style.display = 'inline-block';
     document.getElementById('divInterests').style.display = 'inline-block';
     document.getElementById('saveMyProfile').style.display = 'none';
+    document.getElementById('saveMyPassword').style.display = 'none';
 }
 
 document.getElementById('editMyProfile').addEventListener('click', editProfile);
@@ -63,6 +64,7 @@ function editProfile() {
     //document.getElementById('email').disabled = false;
     document.getElementById('interests').disabled = false;
     document.getElementById('saveMyProfile').style.display = 'inline-block';
+    document.getElementById('saveMyPassword').style.display = 'none';
 }
 
 document.getElementById('editMyPassword').addEventListener('click', editPassword);
@@ -75,8 +77,7 @@ function editPassword() {
     document.getElementById('divPassword').style.display = 'inline-block';
     document.getElementById('divNewPassword').style.display = 'inline-block';
     document.getElementById('divNewPasswordconfirm').style.display = 'inline-block';
-    document.getElementById('password').disabled = false;
-    document.getElementById('saveMyProfile').style.display = 'inline-block';
+    document.getElementById('saveMyPassword').style.display = 'inline-block';
 }
 
 document.getElementById('saveMyProfile').addEventListener('click', saveProfile);
@@ -86,7 +87,7 @@ function saveProfile() {
     personData.cidade = document.getElementById('city').value;
     //personData.email = document.getElementById('email').value;
     personData.interesses = document.getElementById('interests').value;
-    personData.password = document.getElementById('password').value;
+    //personData.password = document.getElementById('password').value;
 
     localStorage.setItem('user', JSON.stringify(personData));
     alert('Salvo!');
@@ -95,18 +96,38 @@ function saveProfile() {
     document.getElementById('city').disabled = true;
     document.getElementById('email').disabled = true;
     document.getElementById('interests').disabled = true;
-    document.getElementById('password').disabled = true;
+    //document.getElementById('password').disabled = true;
     document.getElementById('divName').style.display = 'inline-block';
     document.getElementById('divCity').style.display = 'inline-block';
     document.getElementById('divEmail').style.display = 'inline-block';
     document.getElementById('divInterests').style.display = 'inline-block';
-    document.getElementById('divPassword').style.display = 'none';
-    document.getElementById('divNewPassword').style.display = 'none';
-    document.getElementById('divNewPasswordconfirm').style.display = 'none';
+    //document.getElementById('divPassword').style.display = 'none';
+    //document.getElementById('divNewPassword').style.display = 'none';
+    //document.getElementById('divNewPasswordconfirm').style.display = 'none';
     document.getElementById('saveMyProfile').style.display = 'none';
 }
-function savePassword() {
 
+document.getElementById('saveMyPassword').addEventListener('click', savePassword);
+
+function savePassword() {
+    var senhaAtualJS = personData.password;
+    var senhaAtualDig = document.getElementById('password').value;
+    var senhaNova = document.getElementById('newPassword').value;
+    var senhaNovaConfirmacao = document.getElementById('newPasswordconfirm').value;
+
+    if (senhaAtualJS === senhaAtualDig) {
+        if (senhaNova && senhaNova === senhaNovaConfirmacao) {
+            personData.password = senhaNova;
+            localStorage.setItem('user', JSON.stringify(personData));
+            alert('Senha alterada com sucesso!');
+            window.location.href = 'profile.html'; // Redireciona para profile.html
+        } else {
+            alert('Nova senha e confirmação não correspondem ou estão vazias.');
+        }
+    } else {
+        alert('Credenciais inválidas');
+    }
+    document.getElementById('saveMyPassword').style.display = 'none';
 }
 
 function logout() {
