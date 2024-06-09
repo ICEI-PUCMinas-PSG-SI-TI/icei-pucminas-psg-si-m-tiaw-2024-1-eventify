@@ -81,6 +81,7 @@ function loadEventData() {
 
 function fillEvent() {
     document.getElementById('nome').innerHTML = eventData.nome;
+    document.getElementById('endereco').innerHTML = eventData.endereco;
     document.getElementById('imagem').src = eventData.imagem;
     document.getElementById('data').innerHTML = "<strong>Data:</strong> " + eventData.data;
     document.getElementById('horario').innerHTML = "<strong>Horário:</strong> " + eventData.horario;
@@ -191,6 +192,9 @@ function adicionarComentario() {
     }
 }
 
+
+
+
 function excluirComentario(id) {
     const listaComentarios = eventData.comentarios.filter(comentario => comentario.id !== id);
 
@@ -264,6 +268,31 @@ function excluirEvento() {
 function editarEvento() {
     window.location = "/codigo/pages/create-edit-event.html?ev=" + eventData.id;
 }
+
+function enviarEnderecoLatLon() {
+    document.getElementById('showMap').addEventListener('click', async () => {
+        const fullAddress = document.getElementById('endereco').innerText;
+        try {
+            // aqui tem que modificar para ser o url padrao da nossa aplicacao no replit:
+            // fetch(baseApiUrl + "eventos/" + urlEvent, { method: 'DELETE' })
+            console.log(fullAddress)
+            complete_url = baseApiUrl + `geocode?address=${encodeURIComponent(fullAddress)}`
+            
+            console.log(complete_url)
+            const response = await fetch(baseApiUrl + `geocode?address=${encodeURIComponent(fullAddress)}`);
+            const data = await response.json();
+            if (response.ok) {
+                const { latitude, longitude } = data;
+                window.location.href = `events-map.html?lat=${latitude}&lng=${longitude}`;
+            } else {
+                alert('Erro ao obter coordenadas: ' + data.error);
+            }
+        } catch (error) {
+            alert('Erro ao conectar com o servidor: ' + error.message);
+        }
+    });
+}    
+
 
 function denunciarEvento(el) {
     const motivo = document.getElementById('motivoDenuncia');
