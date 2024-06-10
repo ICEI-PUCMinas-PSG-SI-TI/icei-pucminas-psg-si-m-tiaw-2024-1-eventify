@@ -115,29 +115,35 @@ function initMap() {
     fetch(complete_url)
         .then(function (response) { return response.json() })
         .then(function (data) {
-            const lat = data.latitude;
-            const lng = data.longitude;
+            if (data.latitude && typeof data.latitude === "number" &&
+                data.longitude && typeof data.longitude === "number"
+            ) {
+                const lat = data.latitude;
+                const lng = data.longitude;
 
-            const mapOptions = {
-                center: { lat: lat, lng: lng },
-                zoom: 15
-            };
+                const mapOptions = {
+                    center: { lat: lat, lng: lng },
+                    zoom: 15
+                };
 
-            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+                const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-            const marker = new google.maps.Marker({
-                position: { lat: lat, lng: lng },
-                map: map,
-                title: 'Localizacao do Evento'
-            });
-
-            google.maps.event.addListener(marker, 'click', function () {
-                const modalEl = new bootstrap.Modal('#markerModal', {
-                    keyboard: false
+                const marker = new google.maps.Marker({
+                    position: { lat: lat, lng: lng },
+                    map: map,
+                    title: 'Localizacao do Evento'
                 });
 
-                modalEl.show();
-            });
+                google.maps.event.addListener(marker, 'click', function () {
+                    const modalEl = new bootstrap.Modal('#markerModal', {
+                        keyboard: false
+                    });
+
+                    modalEl.show();
+                });
+            } else {
+                alert("Não foi possívele encontrar o endereço.")
+            }
         })
         .catch(error => {
             document.getElementById('pageContent').style.display = "block";
