@@ -265,19 +265,9 @@ function editarEvento() {
     window.location = "/codigo/pages/create-edit-event.html?ev=" + eventData.id;
 }
 
-function enviarEnderecoLatLon() {
-    // const complete_url = baseApiUrl + `geocode?address=${encodeURIComponent(fullAddress)}`;
-    // const response = fetch(baseApiUrl + `geocode?address=${encodeURIComponent(fullAddress)}`);
-    // const data = response.json();
-
-    // if (response.ok) {
-    //     const { latitude, longitude } = data;
-    //     window.location.href = `events-map.html?lat=${latitude}&lng=${longitude}`;
-    // } else {
-    //     alert('Erro ao obter coordenadas: ' + data.error);
-    // }
+function showMap() {
+    window.location = "/codigo/pages/events-map.html?ev=" + eventData.id;
 }
-
 
 function denunciarEvento(el) {
     const motivo = document.getElementById('motivoDenuncia');

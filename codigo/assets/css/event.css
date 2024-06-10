@@ -136,3 +136,10 @@
         margin: 4px 0 8px;
     }
 }
+
+#showMap {
+    border-radius: 8px;
+    color: #192D37;
+    background-color: white;
+    border: 1px solid #192D37;
+}
