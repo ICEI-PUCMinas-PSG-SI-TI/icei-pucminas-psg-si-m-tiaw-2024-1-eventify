@@ -1,4 +1,4 @@
-const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
+const baseApiUrl = "https://cc0057ba-73b9-4881-9d22-2136c991d8eb-00-2jwqq3dx7jht6.spock.replit.dev/";
 
 //if (!window.location.search || !window.location.search.includes("ev=")) window.location = "/index.html";
 
@@ -8,13 +8,6 @@ var urlEvent = window.location.search.replaceAll("?ev=", "");
 
 if (localStorage.getItem("user")) {
     personData = JSON.parse(localStorage.getItem("user"));
-
-    if (personData.tipoUsuario === "admin" ||
-        (personData.tipoUsuario === "promotor" && personData.eventosCriados && personData.eventosCriados.length &&
-            personData.eventosCriados.some(evento => evento.id === urlEvent))
-    ) {
-        document.getElementById('excluirEventoBotao').style.display = 'block';
-    }
 }
 
 loadUserInfo();
@@ -60,6 +53,7 @@ function loadEventData() {
 
                 eventData = data;
                 fillEventInfo();
+                initMap();
             } else {
                 alert("Evento não encontrado.");
                 window.location = "/index.html";
@@ -115,26 +109,44 @@ function getQueryParams() {
 }
 
 function initMap() {
-    //const { lat, lng } = ToDo: obter geolocalização;
-    const { lat, lng } = { lat: -19.928113, lng: -43.932875 };
-    const mapOptions = {
-        center: { lat: lat, lng: lng },
-        zoom: 15
-    };
-    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    const marker = new google.maps.Marker({
-        position: { lat: lat, lng: lng },
-        map: map,
-        title: 'Localizacao do Evento'
-    });
+    const address = eventData.endereco + ", " + eventData.numero + " - " + eventData.cep;
+    const complete_url = baseApiUrl + `geocode?address=${encodeURIComponent(address)}`;
 
-    google.maps.event.addListener(marker, 'click', function () {
-        const modalEl = new bootstrap.Modal('#markerModal', {
-            keyboard: false
+    fetch(complete_url)
+        .then(function (response) { return response.json() })
+        .then(function (data) {
+            const lat = data.latitude;
+            const lng = data.longitude;
+
+            const mapOptions = {
+                center: { lat: lat, lng: lng },
+                zoom: 15
+            };
+
+            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            const marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                title: 'Localizacao do Evento'
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                const modalEl = new bootstrap.Modal('#markerModal', {
+                    keyboard: false
+                });
+
+                modalEl.show();
+            });
+        })
+        .catch(error => {
+            document.getElementById('pageContent').style.display = "block";
+            document.getElementById('loadSpinner').style.display = "none";
+            alert('Erro ao obter geolocalização.');
         });
-
-        modalEl.show();
-    });
 }
 
-window.onload = initMap;
+function logout() {
+    localStorage.removeItem("user");
+    window.location = "/index.html";
+}
