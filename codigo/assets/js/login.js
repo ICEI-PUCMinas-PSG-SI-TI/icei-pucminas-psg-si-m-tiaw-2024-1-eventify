@@ -140,6 +140,21 @@ function signUp() {
                 .then(function (data) {
                     if (data && data.length) {
                         alert("Já existe um usuário cadastrado com esse login.");
+                    } else if (userType.value === 'promotor') {
+                        fetch(baseApiUrl + "checkCnpj?cnpj=" + userData.cnpj.replace(/[^\d]/g, ""))
+                            .then(function (response) { return response.json() })
+                            .then(function (data) {
+                                if (data.situacao === "ATIVA" && data.atividade_principal) {
+                                    createUser(userData);
+                                } else {
+                                    document.getElementById('signUpButton').innerHTML = "Cadastrar";
+                                    alert('CNPJ inválido.');
+                                }
+                            })
+                            .catch(error => {
+                                document.getElementById('signUpButton').innerHTML = "Cadastrar";
+                                alert('Erro ao criar procurar por CNPJ.');
+                            });
                     } else {
                         createUser(userData);
                     }
@@ -232,8 +247,7 @@ function validarCNPJ(cnpj) {
     }
 
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-    if (resultado != digitos.charAt(1))
-        return false;
+    if (resultado != digitos.charAt(1)) return false;
 
     return true;
 }
