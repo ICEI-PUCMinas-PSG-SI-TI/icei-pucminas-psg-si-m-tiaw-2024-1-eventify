@@ -1,4 +1,4 @@
-const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
+const baseApiUrl = "https://cc0057ba-73b9-4881-9d22-2136c991d8eb-00-2jwqq3dx7jht6.spock.replit.dev/";
 
 var personData;
 var eventsList;
@@ -86,7 +86,7 @@ function fillEvents(list) {
         eventListElement.innerHTML = `<h1 style="margin-bottom: 16px;>Infelizmente não econtramos eventos para os próximos dias. 😕</h1>`;
     }
 
-    if(!hasFutureEvents) eventListElement.innerHTML = `<h1 style="margin-bottom: 16px;">Infelizmente não econtramos eventos para os próximos dias. 😕</h1>`;
+    if (!hasFutureEvents) eventListElement.innerHTML = `<h1 style="margin-bottom: 16px;">Infelizmente não econtramos eventos para os próximos dias. 😕</h1>`;
 
     // toast
     if (personData && personData.eventosFavoritos && personData.eventosFavoritos.length && eventsList && eventsList.length) {
@@ -219,9 +219,9 @@ function toggleAside() {
 
 function filter() {
     const nameEl = document.getElementById('nameFilter');
-    const cityEl = document.getElementById('cityFilter');
     const dateEl = document.getElementById('dateFilter');
     const placeEl = document.getElementById('placeFilter');
+    const addressEl = document.getElementById('addressFilter');
 
     let allEvents = eventsList;
     let filteredEvents = allEvents;
@@ -230,7 +230,7 @@ function filter() {
         document.getElementById('events-list').innerHTML = '';
 
         // show All
-        if (!nameEl.value && !cityEl.value && !dateEl.value && !placeEl.value) {
+        if (!nameEl.value && !addressEl.value && !dateEl.value && !placeEl.value) {
             fillEvents(allEvents);
             return;
         }
@@ -239,16 +239,20 @@ function filter() {
             filteredEvents = filteredEvents.filter(eventData => eventData.nome && eventData.nome.trim().toLowerCase().includes(nameEl.value.trim().toLowerCase()));
         }
 
-        if (cityEl.value) {
-            filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.trim().toLowerCase().includes(cityEl.value.trim().toLowerCase()));
-        }
-
         if (dateEl.value) {
             filteredEvents = filteredEvents.filter(eventData => eventData.data && eventData.data.trim().toLowerCase().includes(dateEl.value.trim().toLowerCase()));
         }
 
         if (placeEl.value) {
             filteredEvents = filteredEvents.filter(eventData => eventData.local && eventData.local.trim().toLowerCase().includes(placeEl.value.trim().toLowerCase()));
+        }
+
+        if (addressEl.value) {
+            filteredEvents = filteredEvents.filter(eventData => 
+                eventData.endereco && eventData.numero &&
+                (eventData.endereco.trim().toLowerCase() + ", " + eventData.numero.trim()
+                    .toLowerCase()).includes(addressEl.value.trim().toLowerCase())
+            );
         }
 
         fillEvents(filteredEvents);

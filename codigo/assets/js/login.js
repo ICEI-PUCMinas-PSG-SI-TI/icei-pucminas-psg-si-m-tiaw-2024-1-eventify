@@ -1,4 +1,4 @@
-const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
+const baseApiUrl = "https://cc0057ba-73b9-4881-9d22-2136c991d8eb-00-2jwqq3dx7jht6.spock.replit.dev/";
 
 function cnpjMask(el) {
     if ((el.value.length === 3 || el.value.length === 7)) {
@@ -140,6 +140,21 @@ function signUp() {
                 .then(function (data) {
                     if (data && data.length) {
                         alert("Já existe um usuário cadastrado com esse login.");
+                    } else if (userType.value === 'promotor') {
+                        fetch(baseApiUrl + "checkCnpj?cnpj=" + userData.cnpj.replace(/[^\d]/g, ""))
+                            .then(function (response) { return response.json() })
+                            .then(function (data) {
+                                if (data.situacao === "ATIVA" && data.atividade_principal) {
+                                    createUser(userData);
+                                } else {
+                                    document.getElementById('signUpButton').innerHTML = "Cadastrar";
+                                    alert('CNPJ inválido.');
+                                }
+                            })
+                            .catch(error => {
+                                document.getElementById('signUpButton').innerHTML = "Cadastrar";
+                                alert('Erro ao criar procurar por CNPJ.');
+                            });
                     } else {
                         createUser(userData);
                     }
@@ -232,8 +247,7 @@ function validarCNPJ(cnpj) {
     }
 
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-    if (resultado != digitos.charAt(1))
-        return false;
+    if (resultado != digitos.charAt(1)) return false;
 
     return true;
 }

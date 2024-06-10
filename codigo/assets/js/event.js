@@ -1,4 +1,4 @@
-const baseApiUrl = "https://9a107ea6-8a7f-4350-a4ea-4e6b0afc2dab-00-30mzjl6xfkqba.riker.replit.dev/";
+const baseApiUrl = "https://cc0057ba-73b9-4881-9d22-2136c991d8eb-00-2jwqq3dx7jht6.spock.replit.dev/";
 
 if (!window.location.search || !window.location.search.includes("ev=")) window.location = "/index.html";
 
@@ -84,8 +84,8 @@ function fillEvent() {
     document.getElementById('imagem').src = eventData.imagem;
     document.getElementById('data').innerHTML = "<strong>Data:</strong> " + eventData.data;
     document.getElementById('horario').innerHTML = "<strong>Horário:</strong> " + eventData.horario;
-    document.getElementById('local').innerHTML = "<strong>Local:</strong> " + 
-        eventData.local + ", N." + eventData.numero + " - " + eventData.cep;
+    document.getElementById('local').innerHTML = "<strong>Local:</strong> " + eventData.local;
+    document.getElementById('endereco').innerHTML = "<strong>Endereco:</strong> " + eventData.endereco + ", " + eventData.numero + " - " + eventData.cep
 
     document.getElementById('descricao').innerHTML = eventData.descricao;
 
@@ -263,6 +263,10 @@ function excluirEvento() {
 
 function editarEvento() {
     window.location = "/codigo/pages/create-edit-event.html?ev=" + eventData.id;
+}
+
+function showMap() {
+    window.location = "/codigo/pages/events-map.html?ev=" + eventData.id;
 }
 
 function denunciarEvento(el) {
