@@ -69,7 +69,6 @@ function fillEvents(list) {
                         </div>
                         <h2>${eventData.data} - ${eventData.horario}</h2>
                         <p>${eventData.local}</p>
-                        <p>${eventData.endereco}</p>
                     </div>
                 </div>
             `;
