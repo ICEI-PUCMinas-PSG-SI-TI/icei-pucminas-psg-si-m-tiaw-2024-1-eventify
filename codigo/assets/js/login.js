@@ -1,4 +1,4 @@
-const baseApiUrl = "https://cc0057ba-73b9-4881-9d22-2136c991d8eb-00-2jwqq3dx7jht6.spock.replit.dev/";
+const baseApiUrl = "https://7e1ff7de-1386-4471-a0d8-c3ef19c272fd-00-3sv06c5zhy1u4.riker.replit.dev/";
 
 function cnpjMask(el) {
     if ((el.value.length === 3 || el.value.length === 7)) {
