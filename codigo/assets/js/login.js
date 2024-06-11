@@ -65,6 +65,7 @@ function signIn() {
 
                         window.location = "/codigo/index.html";
                     } else {
+                        document.getElementById('signInButton').innerHTML = "Entrar";
                         alert("Usuário não encontrado!");
                     }
                 })

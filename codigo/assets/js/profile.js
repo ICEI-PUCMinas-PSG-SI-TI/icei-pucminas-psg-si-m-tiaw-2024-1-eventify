@@ -1,11 +1,13 @@
 const baseApiUrl = "https://cc0057ba-73b9-4881-9d22-2136c991d8eb-00-2jwqq3dx7jht6.spock.replit.dev/";
 
 var personData;
+var editType;
+var eventImageBase64;
 
 if (localStorage.getItem("user")) {
     personData = JSON.parse(localStorage.getItem("user"));
 
-    if(personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
+    if (personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
         document.getElementById('myEventsButton').style.display = 'block';
     }
 } else {
@@ -44,76 +46,176 @@ function loadUserInfo() {
 }
 
 function loadProfileInfo() {
-    document.getElementById('event-name').value = personData.nome;
-    document.getElementById('city').value = personData.cidade;
-    document.getElementById('email').value = personData.email;
-    document.getElementById('interests').value = personData.interesses;
-    document.getElementById('divName').style.display = 'inline-block';
-    document.getElementById('divCity').style.display = 'inline-block';
-    document.getElementById('divEmail').style.display = 'inline-block';
-    document.getElementById('divInterests').style.display = 'inline-block';
-    document.getElementById('saveMyProfile').style.display = 'none';
-    document.getElementById('saveMyPassword').style.display = 'none';
-}
+    editType = "";
 
-document.getElementById('editMyProfile').addEventListener('click', editProfile);
-
-function editProfile() {
-    document.getElementById('event-name').disabled = false;
-    document.getElementById('city').disabled = false;
-    //document.getElementById('email').disabled = false;
-    document.getElementById('interests').disabled = false;
-    document.getElementById('saveMyProfile').style.display = 'inline-block';
-    document.getElementById('saveMyPassword').style.display = 'none';
-}
-
-document.getElementById('editMyPassword').addEventListener('click', editPassword);
-
-function editPassword() {
-    document.getElementById('divName').style.display = 'none';
-    document.getElementById('divCity').style.display = 'none';
-    document.getElementById('divEmail').style.display = 'none';
-    document.getElementById('divInterests').style.display = 'none';
-    document.getElementById('divPassword').style.display = 'inline-block';
-    document.getElementById('divNewPassword').style.display = 'inline-block';
-    document.getElementById('divNewPasswordconfirm').style.display = 'inline-block';
-    document.getElementById('saveMyPassword').style.display = 'inline-block';
-}
-
-document.getElementById('saveMyProfile').addEventListener('click', saveProfile);
-
-function saveProfile() {
-    personData.nome = document.getElementById('event-name').value;
-    personData.cidade = document.getElementById('city').value;
-    //personData.email = document.getElementById('email').value;
-    personData.interesses = document.getElementById('interests').value;
-    //personData.password = document.getElementById('password').value;
-
-    localStorage.setItem('user', JSON.stringify(personData));
-    alert('Salvo!');
-
+    document.getElementById('divName').style.display = 'block';
     document.getElementById('event-name').disabled = true;
+    document.getElementById('event-name').value = personData.nome;
+
+    document.getElementById('divCity').style.display = 'block';
     document.getElementById('city').disabled = true;
-    document.getElementById('email').disabled = true;
-    document.getElementById('interests').disabled = true;
-    //document.getElementById('password').disabled = true;
-    document.getElementById('divName').style.display = 'inline-block';
-    document.getElementById('divCity').style.display = 'inline-block';
-    document.getElementById('divEmail').style.display = 'inline-block';
-    document.getElementById('divInterests').style.display = 'inline-block';
-    //document.getElementById('divPassword').style.display = 'none';
-    //document.getElementById('divNewPassword').style.display = 'none';
-    //document.getElementById('divNewPasswordconfirm').style.display = 'none';
+    document.getElementById('city').value = personData.cidade;
+
+    document.getElementById('divEmail').style.display = 'block';
+    document.getElementById('email').value = personData.email;
+
+    document.getElementById('divInterests').style.display = 'block';
+    document.getElementById('interests').value = personData.interesses;
+
     document.getElementById('saveMyProfile').style.display = 'none';
+    document.getElementById('cancelEditProfile').style.display = 'none';
+
+    document.getElementById('divPassword').style.display = 'none';
+    document.getElementById('password').value = '';
+
+    document.getElementById('divNewPassword').style.display = 'none';
+    document.getElementById('newPassword').value = '';
+
+    document.getElementById('divNewPasswordconfirm').style.display = 'none';
+    document.getElementById('newPasswordconfirm').value = '';
+
+    document.getElementById('editMyProfile').style.display = 'block';
+    document.getElementById('editMyPassword').style.display = 'block';
+
+    document.getElementById('updatePhoto').style.display = "none";
+    document.getElementById('updatePhotoInput').value = "";
+    eventImageBase64 = "";
 }
 
-document.getElementById('saveMyPassword').addEventListener('click', savePassword);
+function editProfile(event) {
+    if (event && event.target && event.target.id) {
+        document.getElementById('editMyProfile').style.display = 'none';
+        document.getElementById('editMyPassword').style.display = 'none';
+        document.getElementById('divInterests').style.display = 'none';
+        document.getElementById('divEmail').style.display = 'none';
+        document.getElementById('saveMyProfile').style.display = 'block';
+        document.getElementById('cancelEditProfile').style.display = 'block';
+
+        if (event.target.id === "editMyProfile") {
+            editType = "profile";
+
+            document.getElementById('event-name').disabled = false;
+            document.getElementById('city').disabled = false;
+            document.getElementById('updatePhoto').style.display = "flex";
+        } else if (event.target.id === "editMyPassword") {
+            editType = "password";
+
+            document.getElementById('divName').style.display = 'none';
+            document.getElementById('divCity').style.display = 'none';
+            document.getElementById('divPassword').style.display = 'block';
+            document.getElementById('divNewPassword').style.display = 'block';
+            document.getElementById('divNewPasswordconfirm').style.display = 'block';
+        }
+    }
+}
+
+function saveProfile(el) {
+    if (editType === "profile") {
+        const tempName = document.getElementById('event-name').value;
+        const tempCity = document.getElementById('city').value;
+        const tempInterests = document.getElementById('interests').value;
+
+        if (!tempName) {
+            alert("Nome é obrigatório.");
+        } else if (!tempCity) {
+            alert("Cidade é obrigatória.");
+        }
+        // else if (!tempInterests) {
+        //     alert("Interesses são obrigatórios.");
+        // } 
+        else {
+            el.innerHTML = `
+                <div class="spinner-border text-light" role="status" style="margin-top: 4px;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            `;
+
+            fetch(baseApiUrl + "pessoas/" + personData.id, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "nome": tempName,
+                    "cidade": tempCity,
+                    "foto": eventImageBase64 || personData.foto
+                })
+            })
+                .then(function (response) { return response.json() })
+                .then(function (data) {
+                    personData = data;
+                    delete personData.login;
+                    delete personData.senha;
+
+                    localStorage.setItem("user", JSON.stringify(personData));
+                    el.innerHTML = "Salvar";
+                    alert("Informações pessoais atualizadas com sucesso!");
+                    window.location.reload();
+                })
+                .catch(error => {
+                    el.innerHTML = "Salvar";
+                    alert(error);
+                });
+        }
+    } else if (editType === "password") {
+        const senhaAtualDig = document.getElementById('password').value;
+        const senhaNova = document.getElementById('newPassword').value;
+        const senhaNovaConfirmacao = document.getElementById('newPasswordconfirm').value;
+
+        if (!senhaAtualDig) {
+            alert("Senha atual é obrigatória.");
+        } else if (!senhaNova) {
+            alert("Nova senha é obrigatória.");
+        } else if (!senhaNovaConfirmacao) {
+            alert("Repetir senha é obrigatória.");
+        } else if (senhaNova !== senhaNovaConfirmacao) {
+            alert("A nova senha deve ser igual a senha repetida.");
+        } else {
+            el.innerHTML = `
+                <div class="spinner-border text-light" role="status" style="margin-top: 4px;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            `;
+
+            fetch(baseApiUrl + "pessoas/" + personData.id)
+                .then(function (response) { return response.json() })
+                .then(function (data) {
+                    if (data.senha === senhaAtualDig) {
+                        fetch(baseApiUrl + "pessoas/" + personData.id, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                "senha": senhaNova
+                            }),
+                        })
+                            .then(function (response) { return response.json() })
+                            .then(function (data) {
+                                el.innerHTML = "Salvar";
+                                alert("Senha atualizada com sucesso!");
+                                loadProfileInfo();
+                            })
+                            .catch(error => {
+                                el.innerHTML = "Salvar";
+                                alert('Erro ao ler eventos via API JSONServer');
+                            });
+                    } else {
+                        el.innerHTML = "Salvar";
+                        alert("A senha atual está incorreta!");
+                    }
+                })
+                .catch(error => {
+                    el.innerHTML = "Salvar";
+                    alert('Erro ao ler eventos via API JSONServer');
+                });
+        }
+    }
+}
 
 function savePassword() {
     var senhaAtualJS = personData.password;
-    var senhaAtualDig = document.getElementById('password').value;
-    var senhaNova = document.getElementById('newPassword').value;
-    var senhaNovaConfirmacao = document.getElementById('newPasswordconfirm').value;
+
 
     if (senhaAtualJS === senhaAtualDig) {
         if (senhaNova && senhaNova === senhaNovaConfirmacao) {
@@ -133,4 +235,15 @@ function savePassword() {
 function logout() {
     localStorage.removeItem("user");
     window.location.reload();
+}
+
+function readFile(el) {
+    if (!el.files || !el.files[0]) return;
+
+    const FR = new FileReader();
+    FR.addEventListener("load", function (evt) {
+        eventImageBase64 = evt.target.result;
+    });
+
+    FR.readAsDataURL(el.files[0]);
 }
