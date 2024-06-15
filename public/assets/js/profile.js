@@ -1,5 +1,6 @@
 const baseApiUrl = "/";
 
+var isFirstLoad = true;
 var personData;
 var editType;
 var eventImageBase64;
@@ -18,6 +19,8 @@ loadUserInfo();
 loadProfileInfo();
 
 function loadUserInfo() {
+
+
     const loggedContent = document.getElementById('logged-content');
     if (personData && personData.id) {
         if (personData.tipoUsuario === "promotor" || personData.tipoUsuario === "admin") {
@@ -46,6 +49,12 @@ function loadUserInfo() {
 }
 
 function loadProfileInfo() {
+    if(isFirstLoad) {
+        document.getElementById('perfilEsquerda').style.display = "none";
+        document.getElementById('dados').style.display = "none";
+        document.getElementById('loadSpinner').style.display = "flex";
+    }
+
     editType = "";
 
     document.getElementById('divName').style.display = 'block';
@@ -61,6 +70,21 @@ function loadProfileInfo() {
 
     document.getElementById('divInterests').style.display = 'block';
     document.getElementById('interests').value = personData.interesses;
+
+    document.getElementById('interestElements').style.display = "none";
+
+    const interestsCheck = document.getElementsByClassName('check-form-button');
+    if (personData.interesses && personData.interesses.length &&
+        interestsCheck && interestsCheck.length
+    ) {
+        for (let i = 0; i < interestsCheck.length; i++) {
+            if (interestsCheck[i] &&
+                personData.interesses.some(interesse => interesse === interestsCheck[i].children.interesses.value)
+            ) {
+                interestsCheck[i].children.interesses.checked = true;
+            }
+        }
+    }
 
     document.getElementById('saveMyProfile').style.display = 'none';
     document.getElementById('cancelEditProfile').style.display = 'none';
@@ -80,6 +104,12 @@ function loadProfileInfo() {
     document.getElementById('updatePhoto').style.display = "none";
     document.getElementById('updatePhotoInput').value = "";
     eventImageBase64 = "";
+
+    if(isFirstLoad) {
+        document.getElementById('perfilEsquerda').style.display = "block";
+        document.getElementById('dados').style.display = "block";
+        document.getElementById('loadSpinner').style.display = "none";
+    }
 }
 
 function editProfile(event) {
@@ -97,6 +127,7 @@ function editProfile(event) {
             document.getElementById('event-name').disabled = false;
             document.getElementById('city').disabled = false;
             document.getElementById('updatePhoto').style.display = "flex";
+            document.getElementById('interestElements').style.display = "flex";
         } else if (event.target.id === "editMyPassword") {
             editType = "password";
 
@@ -113,17 +144,22 @@ function saveProfile(el) {
     if (editType === "profile") {
         const tempName = document.getElementById('event-name').value;
         const tempCity = document.getElementById('city').value;
-        const tempInterests = document.getElementById('interests').value;
+
+        let tempInterests = [];
+        const interestsCheck = document.getElementsByClassName('check-form-button');
+        for (let i = 0; i < interestsCheck.length; i++) {
+            if (interestsCheck[i] && interestsCheck[i].children.interesses.checked) {
+                tempInterests.push(interestsCheck[i].children.interesses.value);
+            }
+        }
 
         if (!tempName) {
             alert("Nome é obrigatório.");
         } else if (!tempCity) {
             alert("Cidade é obrigatória.");
-        }
-        // else if (!tempInterests) {
-        //     alert("Interesses são obrigatórios.");
-        // } 
-        else {
+        } else if (!tempInterests || !tempInterests.length) {
+            alert("Interesses são obrigatórios.");
+        } else {
             el.innerHTML = `
                 <div class="spinner-border text-light" role="status" style="margin-top: 4px;">
                     <span class="sr-only">Loading...</span>
@@ -138,6 +174,7 @@ function saveProfile(el) {
                 body: JSON.stringify({
                     "nome": tempName,
                     "cidade": tempCity,
+                    "interesses": tempInterests,
                     "foto": eventImageBase64 || personData.foto
                 })
             })
@@ -148,13 +185,12 @@ function saveProfile(el) {
                     delete personData.senha;
 
                     localStorage.setItem("user", JSON.stringify(personData));
-                    el.innerHTML = "Salvar";
-                    alert("Informações pessoais atualizadas com sucesso!");
+                    
                     window.location.reload();
                 })
                 .catch(error => {
                     el.innerHTML = "Salvar";
-                    alert(error);
+                    alert("Não foi possível atualizar seu perfil");
                 });
         }
     } else if (editType === "password") {

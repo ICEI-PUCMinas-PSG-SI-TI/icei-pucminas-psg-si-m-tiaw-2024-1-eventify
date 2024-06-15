@@ -129,9 +129,29 @@ function initMap() {
                 const map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
                 const marker = new google.maps.Marker({
-                    position: { lat: lat, lng: lng },
                     map: map,
+                    position: { lat: lat, lng: lng },
                     title: 'Localizacao do Evento'
+                });
+
+                navigator.geolocation.getCurrentPosition((position) => {
+                    if (position && position.coords &&
+                        position.coords.latitude, position.coords.longitude
+                    ) {
+                        const userIcon = {
+                            url: personData && personData.foto ? personData.foto : "../assets/images/userIcon.png", // url
+                            scaledSize: new google.maps.Size(40, 40), // scaled size
+                            origin: new google.maps.Point(0,0), // origin
+                            anchor: new google.maps.Point(0, 0) // anchor
+                        };
+
+                        new google.maps.Marker({
+                            map: map,
+                            position: { lat: position.coords.latitude, lng: position.coords.longitude },
+                            title: 'Sua localização',
+                            icon: userIcon
+                        });
+                    }
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {

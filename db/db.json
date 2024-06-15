@@ -25,7 +25,12 @@
       "nome": "Promotor Felipe",
       "cidade": "Belo Horizonte",
       "email": "promotor@email.com",
-      "interesses": "show,festival,teatro",
+      "interesses": [
+        "show",
+        "festival",
+        "museu",
+        "festa"
+      ],
       "tipoUsuario": "promotor",
       "login": "promotor",
       "senha": "123",

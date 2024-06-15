@@ -17,14 +17,14 @@
 <body>
     <header>
         <div class="header-separeted-content">
-            <a href="/index.html" class="header-logo"><img src="../assets/images/logo (2).png"
-                    alt="EVENTIFY logo"></a>
+            <a href="/index.html" class="header-logo"><img src="../assets/images/logo (2).png" alt="EVENTIFY logo"></a>
         </div>
         <div id="logged-content" class="header-separeted-content"></div>
     </header>
 
     <main class="geral">
-        <form class="perfilEsquerda" onsubmit="return false;">
+        
+        <form id="perfilEsquerda" class="perfilEsquerda" onsubmit="return false;" style="display: none;">
             <div class="header">
                 <h2 class="h2">Perfil</h2>
             </div>
@@ -37,12 +37,12 @@
 
             <div class="buttons">
                 <a href="/pages/favorite-events.html" class="button">Eventos curtidos</a>
-                <a id="myEventsButton" href="/pages/created-events.html" class="button"
-                    style="display: none;">Meus Eventos</a>
+                <a id="myEventsButton" href="/pages/created-events.html" class="button" style="display: none;">Meus
+                    Eventos</a>
             </div>
         </form>
 
-        <form class="dados" onsubmit="return false;">
+        <form id="dados" class="dados" onsubmit="return false;" style="display: none;">
             <div id="divName" style="display:none;" class="input-container">
                 <label for="event-name">Nome:</label><br>
                 <input type="text" id="event-name" name="event-name" disabled><br>
@@ -61,6 +61,38 @@
             <div id="divInterests" style="display:none;" class="input-container">
                 <label for="interests">Interesses:</label><br>
                 <input type="text" id="interests" name="interests" disabled><br>
+            </div>
+
+            <div id="interestElements" style="display: none; flex-direction: column;">
+                <label id="interest-label">Interesses *</label>
+                <div class="check-form-button">
+                    <input type="checkbox" id="show" value="show" name="interesses" />
+                    <label for="show">Show ao vivo</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="festival" value="festival" name="interesses" />
+                    <label for="festival">Festival</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="theater" value="teatro" name="interesses" />
+                    <label for="theater">Teatro</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="museum" value="museu" name="interesses" />
+                    <label for="museum">Museu</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="party" value="festa" name="interesses" />
+                    <label for="party">Festa</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="bar" value="bar" name="interesses" />
+                    <label for="bar">Bar & Cultura</label>
+                </div>
+                <div class="check-form-button botton-input">
+                    <input type="checkbox" id="coffe" value="café" name="interesses" />
+                    <label for="coffe">Café</label>
+                </div>
             </div>
 
             <div id="divPassword" style="display:none;" class="input-container">
@@ -91,40 +123,13 @@
                     Senha</button>
             </div>
         </form>
+
+        <div id="loadSpinner" style="height: 100%; display: none; justify-content: center; align-items: center;">
+            <div class="spinner-border text-dark" role="status" style="margin-top: 4px;">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
     </main>
-
-    <div id="interest-elements" style="display: none; flex-direction: column;">
-        <label id="interest-label">Interesses *</label>
-        <div class="check-form-button">
-            <input type="checkbox" id="show" value="show" name="interesses" />
-            <label for="show">Show ao vivo</label>
-        </div>
-        <div class="check-form-button botton-input">
-            <input type="checkbox" id="festival" value="festival" name="interesses" />
-            <label for="festival">Festival</label>
-        </div>
-        <div class="check-form-button botton-input">
-            <input type="checkbox" id="theater" value="teatro" name="interesses" />
-            <label for="theater">Teatro</label>
-        </div>
-        <div class="check-form-button botton-input">
-            <input type="checkbox" id="museum" value="museu" name="interesses" />
-            <label for="museum">Museu</label>
-        </div>
-        <div class="check-form-button botton-input">
-            <input type="checkbox" id="party" value="festa" name="interesses" />
-            <label for="party">Festa</label>
-        </div>
-        <div class="check-form-button botton-input">
-            <input type="checkbox" id="bar" value="bar" name="interesses" />
-            <label for="bar">Bar & Cultura</label>
-        </div>
-        <div class="check-form-button botton-input">
-            <input type="checkbox" id="coffe" value="café" name="interesses" />
-            <label for="coffe">Café</label>
-        </div>
-    </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -126,3 +126,15 @@ a {
         }
     }
 }
+
+#interestElements {
+    width: 100%;
+}
+
+.check-form-button {
+    input {
+        accent-color: #192D37;
+        width: 16px;
+        height: 16px;
+    }
+}
