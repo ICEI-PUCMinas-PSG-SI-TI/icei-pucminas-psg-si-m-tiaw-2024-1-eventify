@@ -16,8 +16,7 @@
 <body>
     <header>
         <div class="header-separeted-content">
-            <a href="/index.html" class="header-logo"><img src="../assets/images/logo (2).png"
-                    alt="EVENTIFY logo"></a>
+            <a href="/index.html" class="header-logo"><img src="../assets/images/logo (2).png" alt="EVENTIFY logo"></a>
         </div>
         <div id="logged-content" class="header-separeted-content"></div>
     </header>
@@ -27,7 +26,7 @@
 
         <form id="create-edit-form" style="display: none;" onsubmit="return false;">
             <div class="input-container">
-                <label>Nome *</label>
+                <label>Nome do evento *</label>
                 <input class="text-form-button" name="nome" type="text">
             </div>
 
@@ -60,12 +59,22 @@
             </div>
 
             <div class="input-container">
-                <label>Endereço *</label>
-                <input class="text-form-button" name="endereco" type="text" placeholder="Rua">
+                <label id="streetLabel" class="loader-label">Rua *</label>
+                <input id="street" class="text-form-button" name="endereco" type="text" disabled>
             </div>
 
             <div class="input-container">
-                <label>Número (endereço) *</label>
+                <label id="quarterLabel" class="loader-label">Bairro *</label>
+                <input id="quarter" class="text-form-button" name="bairro" type="text" disabled>
+            </div>
+
+            <div class="input-container">
+                <label id="cityLabel" class="loader-label">Cidade *</label>
+                <input id="city" class="text-form-button" name="cidade" type="text" disabled>
+            </div>
+
+            <div class="input-container">
+                <label>Número *</label>
                 <input class="text-form-button" name="numero" type="text">
             </div>
 
