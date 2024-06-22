@@ -11,6 +11,7 @@ O objetivo geral deste projeto é criar de um portal que apresente ferramentas q
 * Rogério Gabriel Lima Dias
 * Tiago dos Reis Gomes
 * Wagner Alexsander de Carvalho Viana
+* Rogerio Gabriel Lima Dias
 
 ## Professores responsáveis
 
@@ -19,4 +20,10 @@ O objetivo geral deste projeto é criar de um portal que apresente ferramentas q
 
 ## Instruções de utilização
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+* Intale a versão mais recente do node: https://nodejs.org/en/download/prebuilt-installer
+* Configure a variável npm no seu ambiente: https://medium.com/@januario86/configurando-vari%C3%A1veis-de-ambiente-do-node-73cd8d8075e8
+* Baixe o projeto EVENTIFY, disponibilizado nesta página
+* Descompacte a paste do projeto
+* No promt de comandos, acesse a pasta do projeto. Caso preferir, abra o projeto no Visual Studio Code e faça isso dentro do programa.
+* Execute o comando "npm install" para baixar as dependências
+* Execute o comando "npm start" para inicializar localmente o projeto
