@@ -139,7 +139,7 @@ function formatEventContent(eventData) {
                     ${getFavEventIcon(eventData.id)}
                 </div>
                 <h2>${eventData.data} - ${eventData.horario}</h2>
-                <p>${eventData.local}</p>
+                <p>${eventData.local} - ${eventData.cidade}</p>
             </div>
         </div>
     `;
@@ -250,8 +250,14 @@ function filter() {
         if (addressEl.value) {
             filteredEvents = filteredEvents.filter(eventData => 
                 eventData.endereco && eventData.numero &&
-                (eventData.endereco.trim().toLowerCase() + ", " + eventData.numero.trim()
-                    .toLowerCase()).includes(addressEl.value.trim().toLowerCase())
+                (
+                    eventData.endereco.trim().toLowerCase() + " " + 
+                    eventData.numero.trim().toLowerCase() + " " +
+                    eventData.bairro.trim().toLowerCase() + " " +
+                    eventData.cidade.trim().toLowerCase() + " " +
+                    eventData.cep.trim().toLowerCase()
+                )
+                .includes(addressEl.value.trim().toLowerCase())
             );
         }
 

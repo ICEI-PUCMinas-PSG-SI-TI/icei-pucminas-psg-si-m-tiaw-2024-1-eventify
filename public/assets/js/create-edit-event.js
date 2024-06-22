@@ -117,6 +117,10 @@ function createEditEventifyEvent() {
             return true;
         });
 
+        if(!eventData.endereco) eventData.endereco = document.getElementById('street').value;
+        if(!eventData.bairro) eventData.bairro = document.getElementById('quarter').value;
+        if(!eventData.cidade) eventData.cidade = document.getElementById('city').value;
+
         const eventDate = new Date(eventData.data.slice(3, 5) + "/" + eventData.data.slice(0, 2) + "/" + eventData.data.slice(-4));
         eventDate.setHours(eventData.horario.slice(0, 2));
         eventDate.setMinutes(eventData.horario.slice(-2));
@@ -257,6 +261,68 @@ function cepMask(el) {
     }
 
     el.value = el.value.replace(/^(\d{5})(\d)/, "$1-$2");
+
+    if (el.value.length === 9) {
+        document.getElementById('streetLabel').innerHTML = `Rua 
+            <div class="spinner-border text-dark spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        `;
+        document.getElementById('quarterLabel').innerHTML = ` Bairro 
+            <div class="spinner-border text-dark spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        `;
+        document.getElementById('cityLabel').innerHTML = `Cidade 
+            <div class="spinner-border text-dark spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        `;
+
+        fetch(`https://viacep.com.br/ws/${el.value}/json/`)
+            .then(function (response) { return response.json() })
+            .then(function (data) {
+                if (data && data.logradouro) {
+                    document.getElementById('street').value = data.logradouro;
+                } else {
+                    document.getElementById('street').value = "";
+                    document.getElementById('street').removeAttribute('disabled');
+                }
+
+                if (data && data.bairro) {
+                    document.getElementById('quarter').value = data.bairro;
+                } else {
+                    document.getElementById('quarter').value = "";
+                    document.getElementById('quarter').removeAttribute('disabled');
+                }
+
+                if (data && data.localidade) {
+                    document.getElementById('city').value = data.localidade;
+                } else {
+                    document.getElementById('city').value = "";
+                    document.getElementById('city').removeAttribute('disabled');
+                }
+
+                document.getElementById('streetLabel').innerHTML = "Rua *";
+                document.getElementById('quarterLabel').innerHTML = "Bairro *";
+                document.getElementById('cityLabel').innerHTML = "Cidade *";
+            })
+            .catch(error => {
+                document.getElementById('streetLabel').innerHTML = "Rua *";
+                document.getElementById('quarterLabel').innerHTML = "Bairro *";
+                document.getElementById('cityLabel').innerHTML = "Cidade *";
+
+                alert('CEP não encontrado.');
+            });
+    } else {
+        document.getElementById('street').value = "";
+        document.getElementById('quarter').value = "";
+        document.getElementById('city').value = "";
+
+        document.getElementById('street').setAttribute('disabled', true);
+        document.getElementById('quarter').setAttribute('disabled', true);
+        document.getElementById('city').setAttribute('disabled', true);
+    }
 }
 
 function readFile(el) {

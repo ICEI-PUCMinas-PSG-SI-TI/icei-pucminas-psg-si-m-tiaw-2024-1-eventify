@@ -85,7 +85,8 @@ function fillEvent() {
     document.getElementById('data').innerHTML = "<strong>Data:</strong> " + eventData.data;
     document.getElementById('horario').innerHTML = "<strong>Horário:</strong> " + eventData.horario;
     document.getElementById('local').innerHTML = "<strong>Local:</strong> " + eventData.local;
-    document.getElementById('endereco').innerHTML = "<strong>Endereco:</strong> " + eventData.endereco + ", " + eventData.numero + " - " + eventData.cep
+    document.getElementById('endereco').innerHTML = "<strong>Endereco:</strong> " + eventData.endereco + 
+        ", " + eventData.numero + " - " + eventData.bairro + ", " + eventData.cidade + " - " + eventData.cep
 
     document.getElementById('descricao').innerHTML = eventData.descricao;
 

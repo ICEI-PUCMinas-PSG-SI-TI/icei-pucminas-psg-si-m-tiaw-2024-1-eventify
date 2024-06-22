@@ -138,6 +138,7 @@ header {
     }
 
     img {
+        max-height: 162.4px;
         width: 35%;
         border-radius: 10px 0 0 10px;
         object-fit: cover;
