@@ -9,12 +9,14 @@
   "keywords": [],
   "author": "Rommel Vieira Carneiro",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "json-serve": "^0.1.0",
     "json-server": "^0.17.4",
-    "node-fetch": "^3.3.2"
-  }
+    "netlify-lambda": "^0.4.0",
+    "node-fetch": "^3.3.2",
+    "@netlify/functions": "^3.0.0",
+  },
+  "type": "module"
 }
