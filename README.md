@@ -11,7 +11,7 @@ O objetivo geral deste projeto é criar de um portal que apresente ferramentas q
 * Rogério Gabriel Lima Dias
 * Tiago dos Reis Gomes
 * Wagner Alexsander de Carvalho Viana
-* Rogerio Gabriel Lima Dias
+
 
 ## Professores responsáveis
 
