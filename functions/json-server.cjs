@@ -2,8 +2,8 @@ const express = require('express');
 const jsonServer = require('json-server');
 const cors = require('cors');
 const fetch = require('node-fetch');
-const { createHandler } = require('netlify-lambda');
-// const { createHandler } = require('@netlify/functions');
+// const { createHandler } = require('netlify-lambda');
+const { createHandler } = require('@netlify/functions');
 
 
 const PORT = process.env.PORT || 3000;
