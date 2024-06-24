@@ -493,28 +493,28 @@
                 <p>Protótipo de telas do sistema em baixa fidelidade (rascunhos). </p>
 
                 <p>Home page</p>
-                <img src="assets/images/wf1.png" alt="Home page">
+                <img style="max-width: 100%;" src="assets/images/wf1.png" alt="Home page">
 
                 <p>Tela de Login e Cadastro</p>
-                <img src="assets/images/wf2.png" alt="Tela de Login e Cadastro">
+                <img style="max-width: 100%;" src="assets/images/wf2.png" alt="Tela de Login e Cadastro">
 
                 <p>Tela de Perfil de Usuário</p>
-                <img src="assets/images/wf3.png" alt="Tela de Perfil de Usuário">
+                <img style="max-width: 100%;" src="assets/images/wf3.png" alt="Tela de Perfil de Usuário">
 
                 <p>Tela de Cadastro de Eventos</p>
-                <img src="assets/images/wf4.png" alt="Tela de Cadastro de Eventos">
+                <img style="max-width: 100%;" src="assets/images/wf4.png" alt="Tela de Cadastro de Eventos">
 
                 <p>Tela de Visualização do Evento</p>
-                <img src="assets/images/wf5.png" alt="Tela de Visualização do Evento">
+                <img style="max-width: 100%;" src="assets/images/wf5.png" alt="Tela de Visualização do Evento">
 
                 <p>Tela de Eventos Curtidos</p>
-                <img src="assets/images/wf6.png" alt="Tela de Eventos Curtidos">
+                <img style="max-width: 100%;" src="assets/images/wf6.png" alt="Tela de Eventos Curtidos">
 
                 <p>Tela de Eventos Criados</p>
-                <img src="assets/images/eventosCriados.png" alt="Tela de Eventos Criados">
+                <img style="max-width: 100%;" src="assets/images/eventosCriados.png" alt="Tela de Eventos Criados">
 
                 <p>Mapa de eventos</p>
-                <img src="assets/images/eventoMapa.png" alt="Mapa de eventos">
+                <img style="max-width: 100%;" src="assets/images/eventoMapa.png" alt="Mapa de eventos">
               </section>
 
             </section>
@@ -622,7 +622,7 @@
                   ao usuário. Não há mais edições ou revisões necessárias, ele está agendado e pronto para a ação.</li>
               </ul>
 
-              <img src="assets/images/planner.png" alt="Planner">
+              <img style="max-width: 100%;" src="assets/images/planner.png" alt="Planner">
             </section>
           </section>
           <hr class="divider">
@@ -646,20 +646,199 @@
               <p>Esta seção apresenta as funcionalidades da solução. </p>
 
               <section>
-                <h5>Funcionalidade 1 - Cadastro de Contatos</h5>
-                <p>Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema</p>
+                <h5>Funcionalidade 01 - Home page</h5>
+                <p>Tela principal do sistema onde serão listados os eventos cadastrados com uma separação entre eventos
+                  passados e eventos futuros. É possível favoritar os eventos caso a pessoa esteja autenticada e ela
+                  será notificada via pop-up nesta tela caso algum desses eventos for ocorrer no dia seguinte ao acesso
+                  no site. Também é possível filtrar os eventos pelo menu lateral.</p>
                 <ul class="list-unstyled">
-                  <li><strong>Estrutura de dados: </strong><a href="#ti_ed_contatos">Contatos</a></li>
+                  <li><strong>Estrutura de dados: </strong><a href='#ti_ed_pessoas'>Pessoas</a> e <a
+                      href="#ti_ed_eventos">Eventos</a></li>
                   <li><strong>Instruções de acesso: </strong>
                     <ul>
-                      <li>Abra o site e efetue o login</li>
-                      <li>Acesse o menu principal e escolha a opção Cadastros </li>
-                      <li>Em seguida, escolha a opção Contatos</li>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>A home page é a primeira tela exibida.</li>
                     </ul>
                   </li>
                 </ul>
-                <p class="text-center"><img class="img-fluid" src="assets/images/exemplo-funcionalidade.png"
-                    alt="Tela Cadastro de Contatos"></p>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid" src="assets/images/home.png"
+                    alt="Home page"></p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 02 - Login/Cadastro de pessoa</h5>
+                <p>Tela onde as pessoas poderão cadastrar suas contas no site ou realizar o login caso já tenham
+                  cadastro. Para se cadastrar como um promotor a pessoa deve inserir um CNPJ que seja encontrado e
+                  esteja ATIVO na receita federal. Essa validação é feita utilizando a API da receita.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href="#ti_ed_pessoas">Pessoas</a></li>
+                  <li><strong>Instruções de acesso: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique em Entrar/Cadastrar no canto superior direito da header do Home.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid" src="assets/images/login.png"
+                    alt="Login/Cadastro de pessoa"></p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 03 - Perfil do usuário</h5>
+                <p>Tela onde a pessoa poderá visualizar e editar suas informações de cadastro e sua foto de perfil.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href="#ti_ed_pessoas">Pessoas</a></li>
+                  <li><strong>Instruções de acesso: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique em Entrar/Cadastrar no canto superior direito da header do Home.</li>
+                      <li>Execute o login ou faça um cadastro.</li>
+                      <li>Clique no ícone da pessoa no canto superior direito da header do Home e depois clique em
+                        perfil.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid" src="assets/images/perfil.png"
+                    alt="Perfil do usuário">
+                </p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 04 - Criar/Editar eventos</h5>
+                <p>Tela onde o promotor conseguirá cadastrar novos eventos ou editar as informações de um evento que já
+                  tenha cadastrado.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href='#ti_ed_pessoas'>Pessoas</a> e <a
+                      href="#ti_ed_eventos">Eventos</a></li>
+                  <li><strong>Instruções de acesso para criar um novo evento: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique em Entrar/Cadastrar no canto superior direito da header do Home.</li>
+                      <li>Execute o login ou faça um cadastro como promotor</li>
+                      <li>Clique no botão Cadastrar novo evento no canto superior direito da header do Home.</li>
+                      <li>Preencha o formulário e depois clique em salvar.</li>
+                    </ul>
+                  </li>
+                  <li><strong>Instruções de acesso para editar um evento existente: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique em Entrar/Cadastrar no canto superior direito da header do Home.</li>
+                      <li>Execute o login ou faça um cadastro como promotor</li>
+                      <li>Crie um evento assim como descrito anteriormente.</li>
+                      <li>Clique no ícone da pessoa no canto superior direito da header do Home e depois clique em Meus
+                        eventos.</li>
+                      <li>Clique no card do evento que deseja editar.</li>
+                      <li>Role a tela para baixo e clique em editar.</li>
+                      <li>Preencha o formulário e depois clique em salvar.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid"
+                    src="assets/images/createEvent.png" alt="Criar/Editar eventos">
+                </p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 05 - Eventos criados</h5>
+                <p>Tela onde o promotor irá visualizar os eventos que ele cadastrou.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href='#ti_ed_pessoas'>Pessoas</a> e <a
+                    href="#ti_ed_eventos">Eventos</a></li>
+                  <li><strong>Instruções de acesso: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique em Entrar/Cadastrar no canto superior direito da header do Home.</li>
+                      <li>Execute o login ou faça um cadastro como promotor.</li>
+                      <li>Crie um evento assim como descrito anteriormente.</li>
+                      <li>Clique no ícone da pessoa no canto superior direito da header do Home e depois clique em Meus
+                        eventos.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid"
+                    src="assets/images/eventosCriados.png" alt="Eventos criados">
+                </p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 06 - Eventos favoritos</h5>
+                <p>Tela onde o usuário irá visualizar os eventos que ele favoritou.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href='#ti_ed_pessoas'>Pessoas</a> e <a
+                    href="#ti_ed_eventos">Eventos</a></li>
+                  <li><strong>Instruções de acesso: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique em Entrar/Cadastrar no canto superior direito da header do Home.</li>
+                      <li>Execute o login ou faça um cadastro</li>
+                      <li>Na home page, favorite um evento ao clicar no ícone de estrela que fica dentro do card do
+                        evento.</li>
+                      <li>Clique no ícone da pessoa no canto superior direito da header do Home e depois clique em
+                        Eventos favoritos.</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid"
+                    src="assets/images/eventosFavoritos.png" alt="Eventos favoritos">
+                </p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 07 - Visualizar evento</h5>
+                <p>Tela onde a pessoa, autenticada ou não, conseguirá ver as informações detalhadas de um evento e os
+                  comentários cadastrados neles. O promotor daquele evento poderá excluí-lo e editá-lo. Usuários logados
+                  poderão adicionar um comentário por evento e excluir os comentários que eles mesmos tenham feito, além
+                  de conseguirem fazer uma denuncia por evento.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href='#ti_ed_pessoas'>Pessoas</a> e <a
+                      href="#ti_ed_eventos">Eventos</a></li>
+                  <li><strong>Instruções de acesso: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique no card de um evento</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid" src="assets/images/evento.png"
+                    alt="Visualizar evento">
+                </p>
+              </section>
+
+              <section>
+                <h5>Funcionalidade 08 - Exibir evento no mapa</h5>
+                <p>Tela onde a localização de evento específico será exibida em um mapa do Google. Caso a pessoa permita
+                  o navegar obter sua localização, esta também será exibida no mapa.</p>
+                <ul class="list-unstyled">
+                  <li><strong>Estrutura de dados: </strong><a href="#ti_ed_eventos">Eventos</a></li>
+                  <li><strong>Instruções de acesso: </strong>
+                    <ul>
+                      <li>Abra um navegador de Internet e informe a seguinte URL: <a
+                          href="https://replit.com/join/vwqjigzsgn-wagneracviana">https://replit.com/join/vwqjigzsgn-wagneracviana</a>
+                      </li>
+                      <li>Clique no card de um evento</li>
+                      <li>Clique no botão Ver evento no mapa</li>
+                    </ul>
+                  </li>
+                </ul>
+                <p class="text-center"><img style="max-width: 100%;" class="img-fluid"
+                    src="assets/images/eventoMapa.png" alt="Exibir evento no mapa">
+                </p>
               </section>
             </section>
 
@@ -787,7 +966,7 @@
                 </ul>
               </section>
 
-              <img src="assets/images/diagramaComp.png" alt="Diagrama de componentes">
+              <img style="max-width: 100%;" src="assets/images/diagramaComp.png" alt="Diagrama de componentes">
             </section>
 
           </section>
