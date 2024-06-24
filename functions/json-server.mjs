@@ -2,7 +2,7 @@ import express from 'express';
 import jsonServer from 'json-server';
 import cors from 'cors';
 import fetch from 'node-fetch';
-import { createHandler } from '@netlify/functions';
+import { createHandler } from 'netlify-lambda';
 
 const PORT = process.env.PORT || 3000;
 const MY_API_GOOGLE = "AIzaSyACgzxJBNFrepWc3iiuDBV8p_Z3iURrWzM";
