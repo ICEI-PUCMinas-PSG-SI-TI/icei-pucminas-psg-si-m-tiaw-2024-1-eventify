@@ -4,14 +4,11 @@ O objetivo geral deste projeto é criar de um portal que apresente ferramentas q
 
 ## Alunos integrantes da equipe
 
-* Ardson Hugo de Oliveira Aguilar
 * Felipe Rodrigues Roque
-* Gabriel Alves Reis
 * Gustavo Coelho de Mendonça
 * Rogério Gabriel Lima Dias
 * Tiago dos Reis Gomes
 * Wagner Alexsander de Carvalho Viana
-
 
 ## Professores responsáveis
 
