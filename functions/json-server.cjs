@@ -1,10 +1,8 @@
-const express = require('express');
-const jsonServer = require('json-server');
-const cors = require('cors');
-const fetch = require('node-fetch');
-// const { createHandler } = require('netlify-lambda');
-const { createHandler } = require('@netlify/functions');
-
+import express from 'express';
+import jsonServer from 'json-server';
+import cors from 'cors';
+import fetch from 'node-fetch';
+import { createHandler } from '@netlify/functions';
 
 const PORT = process.env.PORT || 3000;
 const MY_API_GOOGLE = "AIzaSyACgzxJBNFrepWc3iiuDBV8p_Z3iURrWzM";
@@ -13,6 +11,7 @@ const MY_API_RECEITAWS = "62fcf7919790d705c758c12f7f804fc0";
 const app = express();
 const router = jsonServer.router('./db/db.json');
 const middlewares = jsonServer.defaults();
+
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -102,4 +101,4 @@ async function checkCnpj(cnpj) {
 // Integrando o JSON Server com o Express na rota '/api'
 app.use('/.netlify/functions/json-server', router);
 
-exports.handler = createHandler(app);
+export const handler = createHandler(app);
