@@ -11,7 +11,7 @@ const MY_API_RECEITAWS = "62fcf7919790d705c758c12f7f804fc0";
 const app = express();
 const router = jsonServer.router('./db/db.json');
 const middlewares = jsonServer.defaults({
-  static: undefined  // Desabilitando arquivos estáticos
+  static: 'public' // Certifique-se de que está apontando corretamente para o diretório de arquivos estáticos
 });
 
 app.use(express.json({ limit: '100mb' }));
